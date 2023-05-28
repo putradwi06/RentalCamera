@@ -143,11 +143,13 @@ class LoginPage extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 40),
                     child: ElevatedButton(
                       onPressed: () {},
-                      child: Text("Masuk",
-                          style: AppStyles.textBlackColor.copyWith(
-                            fontSize: 16,
-                            fontWeight: AppStyles.semiBold,
-                          )),
+                      child: Text(
+                        "Daftar",
+                        style: AppStyles.textBlackColor.copyWith(
+                          fontSize: 16,
+                          fontWeight: AppStyles.semiBold,
+                        ),
+                      ),
                     ),
                   ),
                 ],
