@@ -144,7 +144,7 @@ class LoginPage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Text(
-                        "Daftar",
+                        "Masuk",
                         style: AppStyles.textBlackColor.copyWith(
                           fontSize: 16,
                           fontWeight: AppStyles.semiBold,
