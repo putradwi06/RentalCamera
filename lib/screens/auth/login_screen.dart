@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pa_rentalcam/app/styles/app_colors.dart';
 import 'package:lottie/lottie.dart';
-import 'package:pa_rentalcam/app/styles/app_fonts.dart';
+
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
 
 class LoginPage extends StatelessWidget {
@@ -22,22 +22,26 @@ class LoginPage extends StatelessWidget {
               SizedBox(
                 width: 10,
               ),
-              Text(
-                "MASUK",
-                style: TextStyle(
-                  color: Color(0xFF191410),
-                  fontSize: 22,
-                  fontFamily: "Poppins",
-                  fontWeight: FontWeight.w600,
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 32),
+                child: Text(
+                  "Masuk",
+                  style: AppStyles.textBlackColor.copyWith(
+                      fontSize: 22,
+                      fontWeight: AppStyles.semiBold,
+                      color: Color(0xff191410)),
                 ),
               ),
-              Text(
-                "Silahkan login akun kamu",
-                style: TextStyle(
-                    color: Color(0xFFADA8A4),
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
-                    fontFamily: "Poppins"),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 32),
+                child: Text(
+                  "Silahkan login akun kamu",
+                  style: TextStyle(
+                      color: Color(0xFFADA8A4),
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      fontFamily: "Poppins"),
+                ),
               ),
               SizedBox(
                 height: 44,
@@ -53,7 +57,7 @@ class LoginPage extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 40,
+                height: 45,
               ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 32),
@@ -63,10 +67,14 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Text(
                       "Email",
-                      style: TextStyle(fontSize: 14, fontFamily: "Poppins"),
+                      style: AppStyles.textBlackColor.copyWith(
+                        fontSize: 14,
+                        fontWeight: AppStyles.semiBold,
+                        color: Color(0xff191410),
+                      ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 6,
                     ),
                     Container(
                       width: double.infinity,
@@ -105,13 +113,14 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Text(
                       "Password",
-                      style: TextStyle(
+                      style: AppStyles.textBlackColor.copyWith(
                         fontSize: 14,
-                        fontFamily: "Poppins",
+                        fontWeight: AppStyles.semiBold,
+                        color: Color(0xff191410),
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 6,
                     ),
                     Container(
                       width: double.infinity,
@@ -139,24 +148,29 @@ class LoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    width: double.infinity,
-                    margin: EdgeInsets.symmetric(horizontal: 40),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Masuk",
-                        style: AppStyles.textBlackColor.copyWith(
-                          fontSize: 16,
-                          fontWeight: AppStyles.semiBold,
+                  Column(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        height: 50,
+                        margin: EdgeInsets.symmetric(horizontal: 55),
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text(
+                            "Masuk",
+                            style: AppStyles.textBlackColor.copyWith(
+                              fontSize: 16,
+                              fontWeight: AppStyles.semiBold,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ],
               ),
               SizedBox(
-                height: 14,
+                height: 40,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -175,7 +189,7 @@ class LoginPage extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 14,
+                height: 45,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
