@@ -3,6 +3,7 @@ import 'package:pa_rentalcam/screens/auth/add_profil_screen.dart';
 
 import 'package:pa_rentalcam/screens/auth/login_screen.dart';
 import 'package:pa_rentalcam/screens/auth/register_screen.dart';
+import 'package:pa_rentalcam/screens/home/home_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RegisterPage(),
+      home: HomePage(),
     );
   }
 }

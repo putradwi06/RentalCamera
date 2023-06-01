@@ -5,6 +5,8 @@ import 'package:pa_rentalcam/app/styles/app_colors.dart';
 import 'package:lottie/lottie.dart';
 
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
+import 'package:pa_rentalcam/screens/auth/register_screen.dart';
+import 'package:pa_rentalcam/screens/home/home_screen.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -142,7 +144,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 60,
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -154,13 +156,28 @@ class LoginPage extends StatelessWidget {
                         width: double.infinity,
                         height: 50,
                         margin: EdgeInsets.symmetric(horizontal: 55),
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Masuk",
-                            style: AppStyles.textBlackColor.copyWith(
-                              fontSize: 16,
-                              fontWeight: AppStyles.semiBold,
+                        child: MaterialButton(
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()));
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Color(0xff191410),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Masuk",
+                                style: AppStyles.textBlackColor.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: AppStyles.medium,
+                                  color: Color(0xffffffff),
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -177,9 +194,9 @@ class LoginPage extends StatelessWidget {
                 children: [
                   Text(
                     "atau",
-                    style: TextStyle(
+                    style: AppStyles.textBlackColor.copyWith(
                       fontSize: 16,
-                      fontFamily: "Poppins",
+                      fontWeight: AppStyles.semiBold,
                       color: Color(0xffADA8A4),
                     ),
                   ),
@@ -195,23 +212,35 @@ class LoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Tidak punya akun?",
-                    style: TextStyle(
-                      color: Color(0xff7B756F),
+                    "Belum punya akun?",
+                    style: AppStyles.textBlackColor.copyWith(
                       fontSize: 16,
-                      fontFamily: 'Poppins',
+                      fontWeight: AppStyles.semiBold,
+                      color: Color(0xff7B756F),
                     ),
                   ),
                   SizedBox(
                     width: 6,
                   ),
-                  Text(
-                    "Registrasi",
-                    style: TextStyle(
-                      color: Color(0xffFBA651),
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                    ),
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      RegisterPage()));
+                        },
+                        child: Text(
+                          "Registrasi",
+                          style: AppStyles.textBlackColor.copyWith(
+                            fontSize: 16,
+                            fontWeight: AppStyles.semiBold,
+                            color: Color(0xffFBA651),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

@@ -8,6 +8,10 @@ class AppStyles {
     color: AppColors.blackColor,
   );
 
+  static TextStyle textGrey2Color = GoogleFonts.poppins(
+    color: AppColors.grey2Color,
+  );
+
   static TextStyle textBlackSemiBold = GoogleFonts.poppins(
     color: AppColors.blackColor,
     fontWeight: FontWeight.w600,
