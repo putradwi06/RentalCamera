@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:pa_rentalcam/app/app_constants.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
+import 'package:pa_rentalcam/booking/booking_screen.dart';
 
 class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.black,
@@ -14,18 +18,14 @@ class DetailPage extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Detail Kamera',
-              style: AppStyles.textBlackColor.copyWith(
-                fontSize: 18,
-                fontWeight: AppStyles.semiBold,
-                color: Color(0xff191410),
-              ),
-            ),
-          ],
+        centerTitle: true,
+        title: Text(
+          'Detail Kamera',
+          style: AppStyles.textBlackColor.copyWith(
+            fontSize: 18,
+            fontWeight: AppStyles.semiBold,
+            color: Color(0xff191410),
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -35,15 +35,20 @@ class DetailPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
               ),
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 16.0),
                   Container(
                     height: 406,
-                    color: Colors.grey[200],
-                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18),
+                      image: DecorationImage(
+                        image: AssetImage(AppConstants.camera1),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                   SizedBox(height: 30),
                   Text(
@@ -142,7 +147,9 @@ class DetailPage extends StatelessWidget {
                     child: Container(
                       height: 50,
                       child: MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (_) => BookingPage()));
+                        },
                         child: Container(
                           padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(

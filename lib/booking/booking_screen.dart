@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:pa_rentalcam/app/styles/app_colors.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
 import 'package:pa_rentalcam/screens/auth/add_profil_screen.dart';
+import 'package:pa_rentalcam/screens/home/home_screen.dart';
 
-class BookingPage extends StatelessWidget {
+class BookingPage extends StatefulWidget {
+  @override
+  State<BookingPage> createState() => _BookingPageState();
+}
+
+class _BookingPageState extends State<BookingPage> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,98 +47,101 @@ class BookingPage extends StatelessWidget {
             Container(
               color: Colors.white,
               padding: EdgeInsets.all(16.0),
-              child: SizedBox(
-                width: 382,
-                height: 200,
-                child: Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 91,
-                                height: 91,
-                                color: Colors.grey[300],
-                                alignment: Alignment.center,
+              child: Container(
+                color: Colors.white,
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: 91,
+                              height: 91,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                    image: AssetImage("assets/images/camera_1.jpg"),
+                                    fit: BoxFit.cover,
+                                  )
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Sony A6000',
-                                    style: AppStyles.textBlackColor.copyWith(
-                                      fontSize: 18,
-                                      fontWeight: AppStyles.medium,
-                                      color: Colors.black,
-                                    ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Sony A6000',
+                                  style: AppStyles.textBlackColor.copyWith(
+                                    fontSize: 18,
+                                    fontWeight: AppStyles.medium,
+                                    color: Colors.black,
                                   ),
-                                  Text(
-                                    '325 MP APS-CCosmos',
-                                    style: AppStyles.textBlackColor.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: AppStyles.medium,
-                                      color: Color(0xffADA8A4),
-                                    ),
+                                ),
+                                Text(
+                                  '325 MP APS-CCosmos',
+                                  style: AppStyles.textBlackColor.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: AppStyles.medium,
+                                    color: Color(0xffADA8A4),
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Image.asset(
-                                'assets/images/kurang.png',
-                                height: 20,
-                                width: 20,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                '1',
-                                style: AppStyles.textBlackColor.copyWith(
-                                  fontSize: 16,
-                                  fontWeight: AppStyles.medium,
-                                  color: Colors.black,
                                 ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(width: 10),
+                            Image.asset(
+                              'assets/images/kurang.png',
+                              height: 20,
+                              width: 20,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              '1',
+                              style: AppStyles.textBlackColor.copyWith(
+                                fontSize: 16,
+                                fontWeight: AppStyles.medium,
+                                color: Colors.black,
                               ),
-                              SizedBox(
-                                width: 10,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Image.asset(
+                              'assets/images/tambah.png',
+                              height: 20,
+                              width: 20,
+                            ),
+                            Spacer(),
+                            Text(
+                              'Rp600.000',
+                              style: AppStyles.textBlackColor.copyWith(
+                                fontSize: 16,
+                                fontWeight: AppStyles.semiBold,
+                                color: Colors.black,
                               ),
-                              Image.asset(
-                                'assets/images/tambah.png',
-                                height: 20,
-                                width: 20,
-                              ),
-                              Spacer(),
-                              Text(
-                                'Rp600.000',
-                                style: AppStyles.textBlackColor.copyWith(
-                                  fontSize: 16,
-                                  fontWeight: AppStyles.semiBold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -160,15 +173,20 @@ class BookingPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(
                   children: [
+                    // tombol dengan desain terbaru
                     SizedBox(
                       width: 104,
                       height: 40,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          side: const BorderSide(color: Colors.black),
+                          elevation: 0,
+                          backgroundColor: AppColors.backgoundColor,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                          side: BorderSide(color: AppColors.inputBorderColor),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+
+                        },
                         child: Text(
                           '24 Jam',
                           style: AppStyles.textBlackColor.copyWith(
@@ -600,7 +618,7 @@ class BookingPage extends StatelessWidget {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => addProfil()));
+                                  builder: (context) => HomePage()));
                         },
                         child: Container(
                           padding: EdgeInsets.all(10),
