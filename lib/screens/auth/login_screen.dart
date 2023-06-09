@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pa_rentalcam/app/styles/app_colors.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
-import 'package:pa_rentalcam/bottomBar/bottom_bar.dart';
 import 'package:pa_rentalcam/bottomBar/bottom_bar2.dart';
 import 'package:pa_rentalcam/screens/auth/register_screen.dart';
-import 'package:pa_rentalcam/screens/home/home_screen.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -77,27 +74,22 @@ class LoginPage extends StatelessWidget {
                     SizedBox(
                       height: 6,
                     ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          top: BorderSide(color: Colors.orange),
-                          left: BorderSide(color: Colors.orange),
-                          right: BorderSide(color: Colors.orange),
-                          bottom: BorderSide(color: Colors.orange),
-                        ),
-                        borderRadius: BorderRadius.circular(15),
-                        color: Color(0xffD9D9D9),
+                    TextField(
+                      style: AppStyles.textBlackColor.copyWith(
+                          fontSize: 14
                       ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "putra@gmail.com",
-                          contentPadding: EdgeInsets.all(10),
-                          hintStyle: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black,
-                              fontFamily: "Poppins"),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Masukkan email kamu",
+                        contentPadding: EdgeInsets.all(10),
+                        hintStyle: AppStyles.textGrey2Color.copyWith(
+                            fontSize: 14
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18),
+                          borderSide: BorderSide(
+                            color: AppColors.orangeColor,
+                          ),
                         ),
                       ),
                     ),
@@ -124,22 +116,24 @@ class LoginPage extends StatelessWidget {
                     SizedBox(
                       height: 6,
                     ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          border: Border(
-                            top: BorderSide(color: Color(0xffEBE1D8)),
-                            left: BorderSide(color: Color(0xffEBE1D8)),
-                            right: BorderSide(color: Color(0xffEBE1D8)),
-                            bottom: BorderSide(color: Color(0xffEBE1D8)),
+                    TextField(
+                      obscureText: true,
+                      style: AppStyles.textBlackColor.copyWith(
+                        fontSize: 14
+                      ),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Masukkan password kamu",
+                        contentPadding: EdgeInsets.all(10),
+                        hintStyle: AppStyles.textGrey2Color.copyWith(
+                          fontSize: 14
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18),
+                          borderSide: BorderSide(
+                            color: AppColors.orangeColor,
                           ),
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.white),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(10),
-                            border: InputBorder.none,
-                            hintText: ""),
+                        ),
                       ),
                     ),
                   ],

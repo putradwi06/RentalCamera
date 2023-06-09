@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:pa_rentalcam/booking/riwayat_booking.dart';
 import 'package:pa_rentalcam/profil/profil_screen.dart';
 import 'package:pa_rentalcam/screens/home/home_screen.dart';

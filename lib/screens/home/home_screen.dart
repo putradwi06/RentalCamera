@@ -100,8 +100,11 @@ class HomePage extends StatelessWidget {
                               margin: EdgeInsets.all(5),
                               width: 180,
                               height: 220,
-                              color: Color(0xffD9D9D9),
                               alignment: Alignment.topCenter,
+                              decoration: BoxDecoration(
+                                color: Color(0xffD9D9D9),
+                                borderRadius: BorderRadius.circular(18),
+                              ),
                             ),
                             Row(
                               children: [
