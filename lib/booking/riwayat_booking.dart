@@ -9,92 +9,94 @@ class RiwayatBooking extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Riwayat Booking',
-                          style: AppStyles.textBlackColor.copyWith(
-                            fontSize: 22,
-                            fontWeight: AppStyles.semiBold,
-                            color: Color(0xff191410),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Riwayat Booking',
+                            style: AppStyles.textBlackColor.copyWith(
+                              fontSize: 22,
+                              fontWeight: AppStyles.semiBold,
+                              color: Color(0xff191410),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 6,
-                        ),
-                        Text(
-                          'Tangkap momen dengan kamera',
-                          style: AppStyles.textGrey2Color.copyWith(
-                            fontSize: 16,
-                            fontWeight: AppStyles.reguler,
+                          SizedBox(
+                            height: 6,
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 47,
-              ),
-              Divider(),
-              Column(
-                children: [
-                  TabBar(
-                    unselectedLabelColor: Color(0xffADA8A4),
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    labelColor: Colors.black,
-                    dividerColor: Colors.black,
-                    indicatorColor: Colors.black,
-                    tabs: [
-                      Tab(
-                        text: 'Denda',
-                      ),
-                      Tab(
-                        text: "Belum Dibayar",
-                      ),
-                      Tab(
-                        text: "Selesai",
+                          Text(
+                            'Tangkap momen dengan kamera',
+                            style: AppStyles.textGrey2Color.copyWith(
+                              fontSize: 16,
+                              fontWeight: AppStyles.reguler,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Divider(),
+                Column(
+                  children: [
+                    TabBar(
+                      unselectedLabelColor: Color(0xffADA8A4),
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      labelColor: Colors.black,
+                      dividerColor: Colors.black,
+                      indicatorColor: Colors.black,
+                      tabs: [
+                        Tab(
+                          text: 'Denda',
+                        ),
+                        Tab(
+                          text: "Belum Dibayar",
+                        ),
+                        Tab(
+                          text: "Selesai",
+                        ),
+                      ],
+                    ),
 
-                  // Expanded(
-                  //   child: TabBarView(
-                  //     children: [
-                  //       Container(
-                  //         child: Center(
-                  //           child: Text("data"),
-                  //         ),
-                  //       ),
-                  //       Container(
-                  //         child: Center(
-                  //           child: Text("data"),
-                  //         ),
-                  //       ),
-                  //       Container(
-                  //         child: Center(
-                  //           child: Text("data"),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+                    // Expanded(
+                    //   child: TabBarView(
+                    //     children: [
+                    //       Container(
+                    //         child: Center(
+                    //           child: Text("data"),
+                    //         ),
+                    //       ),
+                    //       Container(
+                    //         child: Center(
+                    //           child: Text("data"),
+                    //         ),
+                    //       ),
+                    //       Container(
+                    //         child: Center(
+                    //           child: Text("data"),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
 
-                  Divider(),
-                ],
-              ),
-            ],
+                    Divider(),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -55,9 +55,14 @@ class HomePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    "${AppConstants.assets}search_bar.png",
-                    height: 55,
+                  GestureDetector(
+                    onTap: () {
+                      // TODO:: Arahkan kehalaman search screen
+                    },
+                    child: Image.asset(
+                      "${AppConstants.assets}search_bar.png",
+                      height: 55,
+                    ),
                   ),
                   const SizedBox(width: 6),
                   Image.asset(
