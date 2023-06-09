@@ -1,10 +1,9 @@
-import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pa_rentalcam/app/styles/app_colors.dart';
-import 'package:lottie/lottie.dart';
-
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
+import 'package:pa_rentalcam/bottomBar/bottom_bar.dart';
+import 'package:pa_rentalcam/bottomBar/bottom_bar2.dart';
 import 'package:pa_rentalcam/screens/auth/register_screen.dart';
 import 'package:pa_rentalcam/screens/home/home_screen.dart';
 
@@ -52,7 +51,7 @@ class LoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/images/login.png',
+                    'assets/images/ic_login.png',
                     width: 228,
                     height: 229,
                   ),
@@ -82,18 +81,19 @@ class LoginPage extends StatelessWidget {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         border: Border(
-                          top: BorderSide(color: Colors.black),
-                          left: BorderSide(color: Colors.black),
-                          right: BorderSide(color: Colors.black),
-                          bottom: BorderSide(color: Colors.black),
+                          top: BorderSide(color: Colors.orange),
+                          left: BorderSide(color: Colors.orange),
+                          right: BorderSide(color: Colors.orange),
+                          bottom: BorderSide(color: Colors.orange),
                         ),
                         borderRadius: BorderRadius.circular(15),
-                        color: Colors.white,
+                        color: Color(0xffD9D9D9),
                       ),
                       child: TextField(
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "putra@gmail.com",
+                          contentPadding: EdgeInsets.all(10),
                           hintStyle: TextStyle(
                               fontSize: 14,
                               color: Colors.black,
@@ -128,16 +128,18 @@ class LoginPage extends StatelessWidget {
                       width: double.infinity,
                       decoration: BoxDecoration(
                           border: Border(
-                            top: BorderSide(color: Colors.black),
-                            left: BorderSide(color: Colors.black),
-                            right: BorderSide(color: Colors.black),
-                            bottom: BorderSide(color: Colors.black),
+                            top: BorderSide(color: Color(0xffEBE1D8)),
+                            left: BorderSide(color: Color(0xffEBE1D8)),
+                            right: BorderSide(color: Color(0xffEBE1D8)),
+                            bottom: BorderSide(color: Color(0xffEBE1D8)),
                           ),
                           borderRadius: BorderRadius.circular(15),
                           color: Colors.white),
                       child: TextField(
                         decoration: InputDecoration(
-                            border: InputBorder.none, hintText: ""),
+                            contentPadding: EdgeInsets.all(10),
+                            border: InputBorder.none,
+                            hintText: ""),
                       ),
                     ),
                   ],
@@ -161,7 +163,7 @@ class LoginPage extends StatelessWidget {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomePage()));
+                                    builder: (context) => BottomNav2()));
                           },
                           child: Container(
                             padding: EdgeInsets.all(10),

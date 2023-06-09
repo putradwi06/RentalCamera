@@ -4,48 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pa_rentalcam/app/styles/app_colors.dart';
 
 class HomePage extends StatelessWidget {
-  final List<Camera> recommendedCameras = [
-    Camera(
-      name: 'Canon EOS 5D Mark IV',
-      description:
-          'Kamera DSLR dengan resolusi tinggi dan kemampuan rekam video 4K.',
-      imageUrl: 'https://images.app.goo.gl/5M37AXm6tYh5h8gW6',
-    ),
-    Camera(
-      name: 'Nikon D850',
-      description:
-          'Kamera DSLR dengan sensor full-frame dan fitur pemotretan cepat.',
-      imageUrl: 'https://example.com/nikon_d850.jpg',
-    ),
-    Camera(
-      name: 'Sony Alpha A7 III',
-      description:
-          'Kamera mirrorless dengan kualitas gambar yang luar biasa dan stabilisasi gambar.',
-      imageUrl: 'https://example.com/sony_alpha_a7iii.jpg',
-    ),
-  ];
-
-  final List<Camera> latestCameras = [
-    Camera(
-      name: 'Fujifilm X-T4',
-      description:
-          'Kamera mirrorless dengan fitur canggih dan kualitas gambar yang mengagumkan.',
-      imageUrl: 'https://fujifilm_xt4.jpg',
-    ),
-    Camera(
-      name: 'Panasonic Lumix GH5',
-      description:
-          'Kamera mirrorless dengan kemampuan merekam video 4K dan fitur kreatif.',
-      imageUrl: 'https://example.com/panasonic_gh5.jpg',
-    ),
-    Camera(
-      name: 'Olympus OM-D E-M1 Mark III',
-      description:
-          'Kamera mirrorless dengan teknologi inovatif dan desain yang kokoh.',
-      imageUrl: 'https://example.com/olympus_em1_mark3.jpg',
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,9 +48,7 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   CircleAvatar(
-                    radius: 30,
-                    backgroundImage:
-                        NetworkImage('https://example.com/profile_image.jpg'),
+                    radius: 40,
                   ),
                 ],
               ),
@@ -124,42 +80,217 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 200,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: recommendedCameras.length,
-                itemBuilder: (context, index) {
-                  final camera = recommendedCameras[index];
-                  return Container(
-                    width: 160,
-                    margin: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.network(
-                          camera.imageUrl,
-                          height: 120,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 220,
+                      height: 323,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
                         ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          camera.name,
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                        onPressed: () {},
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(5),
+                              width: 180,
+                              height: 220,
+                              color: Color(0xffD9D9D9),
+                              alignment: Alignment.topCenter,
+                            ),
+                            Row(
+                              children: [
+                                Padding(padding: EdgeInsets.all(5)),
+                                Container(
+                                  child: Text(
+                                    "Sonny A600",
+                                    style: AppStyles.textBlackColor.copyWith(
+                                        fontSize: 18,
+                                        fontWeight: AppStyles.medium,
+                                        color: Color(0xff191410)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Padding(padding: EdgeInsets.all(5)),
+                                Container(
+                                  child: Text(
+                                    "32.5 MP APS-C Cosmos",
+                                    style: AppStyles.textGrey2Color.copyWith(
+                                      fontSize: 14,
+                                      fontWeight: AppStyles.medium,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
                         ),
-                        Text(
-                          camera.description,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
+                      ),
                     ),
-                  );
-                },
+                    SizedBox(width: 24),
+                    SizedBox(
+                      width: 220,
+                      height: 323,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                        ),
+                        onPressed: () {},
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(5),
+                              width: 180,
+                              height: 220,
+                              color: Color(0xffD9D9D9),
+                              alignment: Alignment.topCenter,
+                            ),
+                            Row(
+                              children: [
+                                Padding(padding: EdgeInsets.all(5)),
+                                Container(
+                                  child: Text(
+                                    "Cannon EOS R5",
+                                    style: AppStyles.textBlackColor.copyWith(
+                                        fontSize: 18,
+                                        fontWeight: AppStyles.medium,
+                                        color: Color(0xff191410)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Padding(padding: EdgeInsets.all(5)),
+                                Container(
+                                  child: Text(
+                                    "Wireless 442MHz",
+                                    style: AppStyles.textGrey2Color.copyWith(
+                                      fontSize: 14,
+                                      fontWeight: AppStyles.medium,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 24),
+                    SizedBox(
+                      width: 220,
+                      height: 323,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                        ),
+                        onPressed: () {},
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(5),
+                              width: 180,
+                              height: 220,
+                              color: Color(0xffD9D9D9),
+                              alignment: Alignment.topCenter,
+                            ),
+                            Row(
+                              children: [
+                                Padding(padding: EdgeInsets.all(5)),
+                                Container(
+                                  child: Text(
+                                    "Sonny A600",
+                                    style: AppStyles.textBlackColor.copyWith(
+                                        fontSize: 18,
+                                        fontWeight: AppStyles.medium,
+                                        color: Color(0xff191410)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Padding(padding: EdgeInsets.all(5)),
+                                Container(
+                                  child: Text(
+                                    "32.5 MP APS-C Cosmos",
+                                    style: AppStyles.textGrey2Color.copyWith(
+                                      fontSize: 14,
+                                      fontWeight: AppStyles.medium,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 24),
+                    SizedBox(
+                      width: 220,
+                      height: 323,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                        ),
+                        onPressed: () {},
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(5),
+                              width: 180,
+                              height: 220,
+                              color: Color(0xffD9D9D9),
+                              alignment: Alignment.topCenter,
+                            ),
+                            Row(
+                              children: [
+                                Padding(padding: EdgeInsets.all(5)),
+                                Container(
+                                  child: Text(
+                                    "Sonny A600",
+                                    style: AppStyles.textBlackColor.copyWith(
+                                        fontSize: 18,
+                                        fontWeight: AppStyles.medium,
+                                        color: Color(0xff191410)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Padding(padding: EdgeInsets.all(5)),
+                                Container(
+                                  child: Text(
+                                    "32.5 MP APS-C Cosmos",
+                                    style: AppStyles.textGrey2Color.copyWith(
+                                      fontSize: 14,
+                                      fontWeight: AppStyles.medium,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
+            ),
+            SizedBox(
+              height: 30,
             ),
             Padding(
               padding: EdgeInsets.all(16.0),
@@ -171,56 +302,123 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 300,
-              child: ListView.builder(
-                itemCount: latestCameras.length,
-                itemBuilder: (context, index) {
-                  final camera = latestCameras[index];
-                  return ListTile(
-                    leading: Image.network(
-                      camera.imageUrl,
-                      width: 60,
-                      height: 60,
-                      fit: BoxFit.cover,
+            SingleChildScrollView(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  Container(
+                    color: Colors.white,
+                    child: SizedBox(
+                      width: 382,
+                      height: 90,
+                      child: Container(
+                        color: Colors.white,
+                        padding: EdgeInsets.all(10),
+                        child: Row(
+                          children: [
+                            Column(
+                              children: [
+                                Container(
+                                  width: 70,
+                                  height: 70,
+                                  color: Colors.grey[300],
+                                  alignment: Alignment.center,
+                                ),
+                              ],
+                            ),
+                            SizedBox(width: 16.0),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Sony A6000',
+                                  style: AppStyles.textBlackColor.copyWith(
+                                    fontSize: 18,
+                                    fontWeight: AppStyles.medium,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Text(
+                                  '325 MP APS-CCosmos',
+                                  style: AppStyles.textBlackColor.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: AppStyles.medium,
+                                    color: Color(0xffADA8A4),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    title: Text(camera.name),
-                    subtitle: Text(camera.description),
-                  );
-                },
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        color: Colors.white,
+                        child: SizedBox(
+                          width: 382,
+                          height: 90,
+                          child: Container(
+                            color: Colors.white,
+                            padding: EdgeInsets.all(10),
+                            child: Row(
+                              children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: 70,
+                                      height: 70,
+                                      color: Colors.grey[300],
+                                      alignment: Alignment.center,
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(width: 16.0),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Sony A6000',
+                                      style: AppStyles.textBlackColor.copyWith(
+                                        fontSize: 18,
+                                        fontWeight: AppStyles.medium,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    Text(
+                                      '325 MP APS-CCosmos',
+                                      style: AppStyles.textBlackColor.copyWith(
+                                        fontSize: 14,
+                                        fontWeight: AppStyles.medium,
+                                        color: Color(0xffADA8A4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Order',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-        ],
-      ),
     );
   }
-}
-
-class Camera {
-  final String name;
-  final String description;
-  final String imageUrl;
-
-  Camera({
-    required this.name,
-    required this.description,
-    required this.imageUrl,
-  });
 }

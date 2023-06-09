@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
+import 'package:pa_rentalcam/bottomBar/bottom_bar.dart';
+import 'package:pa_rentalcam/bottomBar/bottom_bar2.dart';
 import 'package:pa_rentalcam/screens/home/home_screen.dart';
 
 class addProfil extends StatelessWidget {
@@ -65,7 +67,7 @@ class addProfil extends StatelessWidget {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()));
+                                  builder: (context) => BottomNav()));
                         },
                         child: Container(
                           padding: EdgeInsets.all(10),

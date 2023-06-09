@@ -1,5 +1,3 @@
-import 'dart:html';
-import 'dart:js_util';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pa_rentalcam/app/styles/app_colors.dart';

@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pa_rentalcam/booking/booking_screen.dart';
+import 'package:pa_rentalcam/booking/riwayat_booking.dart';
+import 'package:pa_rentalcam/bottomBar/bottom_bar.dart';
+import 'package:pa_rentalcam/bottomBar/bottom_bar2.dart';
+import 'package:pa_rentalcam/detail_camera/detail_camera_screen.dart';
+import 'package:pa_rentalcam/profil/profil_screen.dart';
 import 'package:pa_rentalcam/screens/auth/add_profil_screen.dart';
 
 import 'package:pa_rentalcam/screens/auth/login_screen.dart';
@@ -16,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }
