@@ -58,188 +58,190 @@ class LoginPage extends StatelessWidget {
                 height: 45,
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Email",
-                      style: AppStyles.textBlackColor.copyWith(
-                        fontSize: 14,
-                        fontWeight: AppStyles.semiBold,
-                        color: Color(0xff191410),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 6,
-                    ),
-                    TextField(
-                      style: AppStyles.textBlackColor.copyWith(
-                          fontSize: 14
-                      ),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Masukkan email kamu",
-                        contentPadding: EdgeInsets.all(10),
-                        hintStyle: AppStyles.textGrey2Color.copyWith(
-                            fontSize: 14
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(
-                            color: AppColors.orangeColor,
+                color: Colors.white,
+                margin: EdgeInsets.all(24),
+                child: Column(children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 32),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Email",
+                          style: AppStyles.textBlackColor.copyWith(
+                            fontSize: 14,
+                            fontWeight: AppStyles.semiBold,
+                            color: Color(0xff191410),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Password",
-                      style: AppStyles.textBlackColor.copyWith(
-                        fontSize: 14,
-                        fontWeight: AppStyles.semiBold,
-                        color: Color(0xff191410),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 6,
-                    ),
-                    TextField(
-                      obscureText: true,
-                      style: AppStyles.textBlackColor.copyWith(
-                        fontSize: 14
-                      ),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Masukkan password kamu",
-                        contentPadding: EdgeInsets.all(10),
-                        hintStyle: AppStyles.textGrey2Color.copyWith(
-                          fontSize: 14
+                        SizedBox(
+                          height: 6,
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(
-                            color: AppColors.orangeColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 60,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 55),
-                        child: MaterialButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => BottomNav2()));
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Color(0xff191410),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Masuk",
-                                style: AppStyles.textBlackColor.copyWith(
-                                  fontSize: 16,
-                                  fontWeight: AppStyles.medium,
-                                  color: Color(0xffffffff),
-                                ),
+                        TextField(
+                          style:
+                              AppStyles.textBlackColor.copyWith(fontSize: 14),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Masukkan email kamu",
+                            contentPadding: EdgeInsets.all(10),
+                            hintStyle:
+                                AppStyles.textGrey2Color.copyWith(fontSize: 14),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              borderSide: BorderSide(
+                                color: AppColors.orangeColor,
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "atau",
-                    style: AppStyles.textBlackColor.copyWith(
-                      fontSize: 16,
-                      fontWeight: AppStyles.semiBold,
-                      color: Color(0xffADA8A4),
+                      ],
                     ),
                   ),
                   SizedBox(
-                    height: 14,
+                    height: 20,
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 45,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Belum punya akun?",
-                    style: AppStyles.textBlackColor.copyWith(
-                      fontSize: 16,
-                      fontWeight: AppStyles.semiBold,
-                      color: Color(0xff7B756F),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 6,
-                  ),
-                  Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      RegisterPage()));
-                        },
-                        child: Text(
-                          "Registrasi",
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 32),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Password",
                           style: AppStyles.textBlackColor.copyWith(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: AppStyles.semiBold,
-                            color: Color(0xffFBA651),
+                            color: Color(0xff191410),
                           ),
                         ),
+                        SizedBox(
+                          height: 6,
+                        ),
+                        TextField(
+                          obscureText: true,
+                          style:
+                              AppStyles.textBlackColor.copyWith(fontSize: 14),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Masukkan password kamu",
+                            contentPadding: EdgeInsets.all(10),
+                            hintStyle:
+                                AppStyles.textGrey2Color.copyWith(fontSize: 14),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              borderSide: BorderSide(
+                                color: AppColors.orangeColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 60,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            height: 50,
+                            margin: EdgeInsets.symmetric(horizontal: 55),
+                            child: MaterialButton(
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => BottomNav2()));
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Color(0xff191410),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "Masuk",
+                                    style: AppStyles.textBlackColor.copyWith(
+                                      fontSize: 16,
+                                      fontWeight: AppStyles.medium,
+                                      color: Color(0xffffffff),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "atau",
+                        style: AppStyles.textBlackColor.copyWith(
+                          fontSize: 16,
+                          fontWeight: AppStyles.semiBold,
+                          color: Color(0xffADA8A4),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 14,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 45,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Belum punya akun?",
+                        style: AppStyles.textBlackColor.copyWith(
+                          fontSize: 16,
+                          fontWeight: AppStyles.semiBold,
+                          color: Color(0xff7B756F),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 6,
+                      ),
+                      Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          RegisterPage()));
+                            },
+                            child: Text(
+                              "Registrasi",
+                              style: AppStyles.textBlackColor.copyWith(
+                                fontSize: 16,
+                                fontWeight: AppStyles.semiBold,
+                                color: Color(0xffFBA651),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ]),
+              )
             ],
           ),
         ),
