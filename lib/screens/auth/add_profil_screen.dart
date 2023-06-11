@@ -64,10 +64,7 @@ class addProfil extends StatelessWidget {
                       margin: EdgeInsets.symmetric(horizontal: 55),
                       child: MaterialButton(
                         onPressed: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => BottomNav()));
+
                         },
                         child: Container(
                           padding: EdgeInsets.all(10),

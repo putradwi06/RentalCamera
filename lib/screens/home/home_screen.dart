@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pa_rentalcam/app/app_constants.dart';
 import 'package:pa_rentalcam/app/styles/app_colors.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
 import 'package:pa_rentalcam/detail_camera/detail_camera_screen.dart';
@@ -56,12 +55,12 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "${AppConstants.assets}search_bar.png",
+                    "assets/images/search_bar.png",
                     height: 55,
                   ),
                   const SizedBox(width: 6),
                   Image.asset(
-                    "${AppConstants.assets}Filter.png",
+                    "assets/images/Filter.png",
                     height: 55,
                   ),
                 ],
@@ -102,7 +101,7 @@ class HomePage extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(18),
                                   child: Image.asset(
-                                    AppConstants.camera1,
+                                   "assets/images/camera_1.jpg",
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -177,7 +176,7 @@ class HomePage extends StatelessWidget {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(18),
                                       child: Image.asset(
-                                        AppConstants.camera1,
+                                        "assets/images/camera_1.jpg",
                                         fit: BoxFit.cover,
                                       ),
                                     ),
