@@ -48,272 +48,291 @@ class RegisterPage extends StatelessWidget {
                 height: 44,
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 32),
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    color: Colors.white),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      "Nama",
-                      style: AppStyles.textBlackColor.copyWith(
-                        fontSize: 14,
-                        fontWeight: AppStyles.semiBold,
-                        color: Color(0xff191410),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 6,
-                    ),
                     Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          top: BorderSide(color: Colors.black),
-                          left: BorderSide(color: Colors.black),
-                          right: BorderSide(color: Colors.black),
-                          bottom: BorderSide(color: Colors.black),
-                        ),
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white,
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintStyle: TextStyle(
+                      margin: EdgeInsets.symmetric(horizontal: 32),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Nama",
+                            style: AppStyles.textBlackColor.copyWith(
                               fontSize: 14,
-                              color: Colors.black,
-                              fontFamily: "Poppins"),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Email",
-                      style: AppStyles.textBlackColor.copyWith(
-                        fontSize: 14,
-                        fontWeight: AppStyles.semiBold,
-                        color: Color(0xff191410),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 6,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          top: BorderSide(color: Colors.black),
-                          left: BorderSide(color: Colors.black),
-                          right: BorderSide(color: Colors.black),
-                          bottom: BorderSide(color: Colors.black),
-                        ),
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.white,
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "putra@gmail.com",
-                          hintStyle: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black,
-                              fontFamily: "Poppins"),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Password",
-                      style: AppStyles.textBlackColor.copyWith(
-                        fontSize: 14,
-                        fontWeight: AppStyles.semiBold,
-                        color: Color(0xff191410),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 6,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          border: Border(
-                            top: BorderSide(color: Colors.black),
-                            left: BorderSide(color: Colors.black),
-                            right: BorderSide(color: Colors.black),
-                            bottom: BorderSide(color: Colors.black),
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.white),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: InputBorder.none, hintText: ""),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Ulangi Password",
-                      style: AppStyles.textBlackColor.copyWith(
-                        fontSize: 14,
-                        fontWeight: AppStyles.semiBold,
-                        color: Color(0xff191410),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 6,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          border: Border(
-                            top: BorderSide(color: Colors.black),
-                            left: BorderSide(color: Colors.black),
-                            right: BorderSide(color: Colors.black),
-                            bottom: BorderSide(color: Colors.black),
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.white),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: InputBorder.none, hintText: ""),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 60,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 55),
-                        child: MaterialButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => addProfil()));
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
+                              fontWeight: AppStyles.semiBold,
                               color: Color(0xff191410),
-                              borderRadius: BorderRadius.circular(12),
                             ),
-                            child: Center(
-                              child: Text(
-                                "Registrasi",
-                                style: AppStyles.textBlackColor.copyWith(
-                                  fontSize: 16,
-                                  fontWeight: AppStyles.medium,
-                                  color: Color(0xffffffff),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Container(
+                            width: double.infinity,
+                            child: TextField(
+                              style: AppStyles.textBlackColor
+                                  .copyWith(fontSize: 14),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                contentPadding: EdgeInsets.all(10),
+                                hintStyle: AppStyles.textGrey2Color
+                                    .copyWith(fontSize: 14),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                  borderSide: BorderSide(
+                                    color: AppColors.orangeColor,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "atau",
-                    style: AppStyles.textBlackColor.copyWith(
-                      fontSize: 16,
-                      fontWeight: AppStyles.semiBold,
-                      color: Color(0xffADA8A4),
                     ),
-                  ),
-                  SizedBox(
-                    height: 14,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 45,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Sudah punya akun?",
-                    style: AppStyles.textBlackColor.copyWith(
-                      fontSize: 16,
-                      fontWeight: AppStyles.semiBold,
-                      color: Color(0xff7B756F),
+                    SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  SizedBox(
-                    width: 6,
-                  ),
-                  Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      LoginPage()));
-                        },
-                        child: Text(
-                          "Masuk",
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 32),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Email",
+                            style: AppStyles.textBlackColor.copyWith(
+                              fontSize: 14,
+                              fontWeight: AppStyles.semiBold,
+                              color: Color(0xff191410),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Container(
+                            width: double.infinity,
+                            child: TextField(
+                              style: AppStyles.textBlackColor
+                                  .copyWith(fontSize: 14),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                contentPadding: EdgeInsets.all(10),
+                                hintStyle: AppStyles.textGrey2Color
+                                    .copyWith(fontSize: 14),
+                                hintText: "putra@gmail.com",
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                  borderSide: BorderSide(
+                                    color: AppColors.orangeColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 32),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Password",
+                            style: AppStyles.textBlackColor.copyWith(
+                              fontSize: 14,
+                              fontWeight: AppStyles.semiBold,
+                              color: Color(0xff191410),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Container(
+                            width: double.infinity,
+                            child: TextField(
+                              style: AppStyles.textBlackColor
+                                  .copyWith(fontSize: 14),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                contentPadding: EdgeInsets.all(10),
+                                hintStyle: AppStyles.textGrey2Color
+                                    .copyWith(fontSize: 14),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                  borderSide: BorderSide(
+                                    color: AppColors.orangeColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 32),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Ulangi Password",
+                            style: AppStyles.textBlackColor.copyWith(
+                              fontSize: 14,
+                              fontWeight: AppStyles.semiBold,
+                              color: Color(0xff191410),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Container(
+                            width: double.infinity,
+                            child: TextField(
+                              style: AppStyles.textBlackColor
+                                  .copyWith(fontSize: 14),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                contentPadding: EdgeInsets.all(10),
+                                hintStyle: AppStyles.textGrey2Color
+                                    .copyWith(fontSize: 14),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                  borderSide: BorderSide(
+                                    color: AppColors.orangeColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 60,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: 50,
+                              margin: EdgeInsets.symmetric(horizontal: 55),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => addProfil()));
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xff191410),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Registrasi",
+                                      style: AppStyles.textBlackColor.copyWith(
+                                        fontSize: 16,
+                                        fontWeight: AppStyles.medium,
+                                        color: Color(0xffffffff),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "atau",
                           style: AppStyles.textBlackColor.copyWith(
                             fontSize: 16,
                             fontWeight: AppStyles.semiBold,
-                            color: Color(0xffFBA651),
+                            color: Color(0xffADA8A4),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                        SizedBox(
+                          height: 14,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 45,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Sudah punya akun?",
+                          style: AppStyles.textBlackColor.copyWith(
+                            fontSize: 16,
+                            fontWeight: AppStyles.semiBold,
+                            color: Color(0xff7B756F),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            LoginPage()));
+                              },
+                              child: Text(
+                                "Masuk",
+                                style: AppStyles.textBlackColor.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: AppStyles.semiBold,
+                                  color: Color(0xffFBA651),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),

@@ -58,7 +58,10 @@ class LoginPage extends StatelessWidget {
                 height: 45,
               ),
               Container(
-                color: Colors.white,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    color: Colors.white),
+                padding: EdgeInsets.all(10),
                 margin: EdgeInsets.all(24),
                 child: Column(children: [
                   Container(
@@ -82,7 +85,9 @@ class LoginPage extends StatelessWidget {
                           style:
                               AppStyles.textBlackColor.copyWith(fontSize: 14),
                           decoration: InputDecoration(
-                            border: InputBorder.none,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18),
+                            ),
                             hintText: "Masukkan email kamu",
                             contentPadding: EdgeInsets.all(10),
                             hintStyle:
@@ -123,7 +128,9 @@ class LoginPage extends StatelessWidget {
                           style:
                               AppStyles.textBlackColor.copyWith(fontSize: 14),
                           decoration: InputDecoration(
-                            border: InputBorder.none,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18),
+                            ),
                             hintText: "Masukkan password kamu",
                             contentPadding: EdgeInsets.all(10),
                             hintStyle:

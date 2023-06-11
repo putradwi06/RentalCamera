@@ -56,7 +56,10 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            Padding(
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(18),
+              ),
               padding: EdgeInsets.all(30),
               child: TextFormField(
                 decoration: InputDecoration(
@@ -83,10 +86,14 @@ class HomePage extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   children: [
-                    SizedBox(
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xffD9D9D9),
+                        borderRadius: BorderRadius.circular(18),
+                      ),
                       width: 220,
                       height: 323,
                       child: ElevatedButton(
@@ -139,57 +146,11 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 24),
-                    SizedBox(
-                      width: 220,
-                      height: 323,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                        ),
-                        onPressed: () {},
-                        child: Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.all(5),
-                              width: 180,
-                              height: 220,
-                              color: Color(0xffD9D9D9),
-                              alignment: Alignment.topCenter,
-                            ),
-                            Row(
-                              children: [
-                                Padding(padding: EdgeInsets.all(5)),
-                                Container(
-                                  child: Text(
-                                    "Cannon EOS R5",
-                                    style: AppStyles.textBlackColor.copyWith(
-                                        fontSize: 18,
-                                        fontWeight: AppStyles.medium,
-                                        color: Color(0xff191410)),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Padding(padding: EdgeInsets.all(5)),
-                                Container(
-                                  child: Text(
-                                    "Wireless 442MHz",
-                                    style: AppStyles.textGrey2Color.copyWith(
-                                      fontSize: 14,
-                                      fontWeight: AppStyles.medium,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xffD9D9D9),
+                        borderRadius: BorderRadius.circular(18),
                       ),
-                    ),
-                    SizedBox(width: 24),
-                    SizedBox(
                       width: 220,
                       height: 323,
                       child: ElevatedButton(
@@ -203,8 +164,11 @@ class HomePage extends StatelessWidget {
                               margin: EdgeInsets.all(5),
                               width: 180,
                               height: 220,
-                              color: Color(0xffD9D9D9),
                               alignment: Alignment.topCenter,
+                              decoration: BoxDecoration(
+                                color: Color(0xffD9D9D9),
+                                borderRadius: BorderRadius.circular(18),
+                              ),
                             ),
                             Row(
                               children: [
@@ -239,7 +203,11 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 24),
-                    SizedBox(
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xffD9D9D9),
+                        borderRadius: BorderRadius.circular(18),
+                      ),
                       width: 220,
                       height: 323,
                       child: ElevatedButton(
@@ -253,8 +221,68 @@ class HomePage extends StatelessWidget {
                               margin: EdgeInsets.all(5),
                               width: 180,
                               height: 220,
-                              color: Color(0xffD9D9D9),
                               alignment: Alignment.topCenter,
+                              decoration: BoxDecoration(
+                                color: Color(0xffD9D9D9),
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Padding(padding: EdgeInsets.all(5)),
+                                Container(
+                                  child: Text(
+                                    "Sonny A600",
+                                    style: AppStyles.textBlackColor.copyWith(
+                                        fontSize: 18,
+                                        fontWeight: AppStyles.medium,
+                                        color: Color(0xff191410)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Padding(padding: EdgeInsets.all(5)),
+                                Container(
+                                  child: Text(
+                                    "32.5 MP APS-C Cosmos",
+                                    style: AppStyles.textGrey2Color.copyWith(
+                                      fontSize: 14,
+                                      fontWeight: AppStyles.medium,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 24),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xffD9D9D9),
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      width: 220,
+                      height: 323,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                        ),
+                        onPressed: () {},
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(5),
+                              width: 180,
+                              height: 220,
+                              alignment: Alignment.topCenter,
+                              decoration: BoxDecoration(
+                                color: Color(0xffD9D9D9),
+                                borderRadius: BorderRadius.circular(18),
+                              ),
                             ),
                             Row(
                               children: [
@@ -310,8 +338,45 @@ class HomePage extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    color: Colors.white,
-                    child: SizedBox(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 90,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
+                              color: Colors.white,
+                            ),
+                            padding: EdgeInsets.all(10),
+                            child: Row(
+                              children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(18),
+                                        color: Colors.grey,
+                                      ),
+                                      width: 70,
+                                      height: 70,
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(width: 16.0),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        color: Colors.white,
+                      ),
                       width: 382,
                       height: 90,
                       child: Container(

@@ -17,13 +17,13 @@ class addProfil extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Icon(
-              Icons.person,
-              size: 100.0,
-              color: Colors.black,
+            Image.asset(
+              'assets/images/add_profile.png',
+              width: 140,
+              height: 140,
             ),
             SizedBox(
-              height: 15.0,
+              height: 40,
             ),
             Text(
               "Tambahkan foto profil",
@@ -33,7 +33,7 @@ class addProfil extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 16,
+              height: 12,
             ),
             Text(
               "Lengkapi profil kamu dengan",
