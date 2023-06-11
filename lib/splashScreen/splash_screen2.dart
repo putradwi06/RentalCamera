@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pa_rentalcam/screens/auth/login_screen.dart';
@@ -65,3 +66,4 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     );
   }
 }
+*/

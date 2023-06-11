@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pa_rentalcam/app/app_constants.dart';
 import 'package:pa_rentalcam/app/styles/app_colors.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
 import 'package:pa_rentalcam/detail_camera/detail_camera_screen.dart';
@@ -37,7 +36,7 @@ class search extends StatelessWidget {
                   GestureDetector(
                     onTap: () {},
                     child: Image.asset(
-                      "${AppConstants.assets}search_bar.png",
+                      "assets/images/search_bar.png",
                       height: 55,
                     ),
                   ),
