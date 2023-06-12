@@ -7,16 +7,15 @@ class DetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          color: Colors.black,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Column(
+              children: [Image.asset("assets/images/back.png")],
+            ),
+            SizedBox(
+              width: 84,
+            ),
             Text(
               'Detail Kamera',
               style: AppStyles.textBlackColor.copyWith(
@@ -32,18 +31,20 @@ class DetailPage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
               padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 16.0),
                   Container(
+                    decoration: new BoxDecoration(
+                      image: new DecorationImage(
+                        image: new AssetImage("assets/images/camera_1.png"),
+                      ),
+                      color: Color(0xffD9D9D9),
+                      borderRadius: BorderRadius.circular(18),
+                    ),
                     height: 406,
-                    color: Colors.grey[200],
-                    alignment: Alignment.center,
                   ),
                   SizedBox(height: 30),
                   Text(
@@ -108,7 +109,7 @@ class DetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: 50),
             Container(
               color: Colors.white,
               padding: EdgeInsets.symmetric(horizontal: 16.0),
