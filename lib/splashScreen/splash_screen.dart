@@ -1,45 +1,39 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:pa_rentalcam/screens/auth/login_screen.dart';
-import 'package:pa_rentalcam/screens/home/home_screen.dart';
 
-class splash extends StatefulWidget {
-  const splash({super.key});
-
+class SplashScreenPage extends StatefulWidget {
+  const SplashScreenPage({Key? key}) : super(key: key);
   @override
-  State<splash> createState() => _splashState();
+  _SplashScreenPageState createState() => _SplashScreenPageState();
 }
 
-class _splashState extends State<splash> {
+class _SplashScreenPageState extends State<SplashScreenPage> {
+  @override
   void initState() {
     super.initState();
-    startTimer();
+    openSplashScreen();
   }
 
-  startTimer() {
-    var duration = Duration(seconds: 5);
-    return Timer(duration, route);
-  }
-
-  route() {
-    Navigator.pushReplacementNamed((context), '/login');
+  openSplashScreen() async {
+    var durasiSplash = const Duration(seconds: 6);
+    return Timer(durasiSplash, () {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
+        return LoginPage();
+      }));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: content(),
-    );
-  }
-
-  Widget content() {
-    return Center(
-      child: Container(
-        child: Lottie.network(
-            'https://assets6.lottiefiles.com/packages/lf20_uewt8rjj.json'),
+      body: Center(
+        child: Image.asset(
+          "assets/images/logo_mbgcam.png",
+          width: 1000,
+          height: 500,
+        ),
       ),
     );
   }

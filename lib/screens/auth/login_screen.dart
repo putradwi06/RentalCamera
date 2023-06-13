@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pa_rentalcam/app/styles/app_colors.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
-import 'package:pa_rentalcam/bottomBar/bottom_bar2.dart';
+
 import 'package:pa_rentalcam/dashboard_screen.dart';
 import 'package:pa_rentalcam/screens/auth/register_screen.dart';
 
@@ -165,7 +165,8 @@ class LoginPage extends StatelessWidget {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => DashboardScreen()));
+                                        builder: (context) =>
+                                            DashboardScreen()));
                               },
                               child: Container(
                                 padding: EdgeInsets.all(10),

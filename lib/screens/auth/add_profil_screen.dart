@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
-import 'package:pa_rentalcam/bottomBar/bottom_bar.dart';
-import 'package:pa_rentalcam/bottomBar/bottom_bar2.dart';
+import 'package:pa_rentalcam/dashboard_screen.dart';
+
 import 'package:pa_rentalcam/screens/home/home_screen.dart';
 
 class addProfil extends StatelessWidget {
@@ -64,7 +64,10 @@ class addProfil extends StatelessWidget {
                       margin: EdgeInsets.symmetric(horizontal: 55),
                       child: MaterialButton(
                         onPressed: () {
-
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      DashboardScreen()));
                         },
                         child: Container(
                           padding: EdgeInsets.all(10),

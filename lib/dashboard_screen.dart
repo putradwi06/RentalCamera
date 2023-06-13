@@ -17,7 +17,7 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   List<Widget> tabs = [
     HomePage(),
-    RiwayatBooking(),
+    riwayatBooking(),
     ProfilePage(),
   ];
 
@@ -36,7 +36,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         decoration: BoxDecoration(
           color: AppColors.whiteColor,
         ),
-        child:  SafeArea(
+        child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 38,
@@ -80,7 +80,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       body: Center(
         child: tabs.elementAt(currentPage),
       ),
-
     );
   }
 }

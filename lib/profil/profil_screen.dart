@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
+import 'package:pa_rentalcam/profil/tentang.dart';
+import 'package:pa_rentalcam/screens/auth/login_screen.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -23,8 +25,14 @@ class ProfilePage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 58),
-              CircleAvatar(
-                radius: 120,
+              Column(
+                children: [
+                  Image.asset(
+                    "assets/images/add_profile.png",
+                    width: 120,
+                    height: 120,
+                  ),
+                ],
               ),
               SizedBox(height: 20),
               Text(
@@ -48,7 +56,11 @@ class ProfilePage extends StatelessWidget {
               ),
               SizedBox(height: 24.0),
               ListTile(
-                leading: Icon(Icons.person),
+                leading: Image.asset(
+                  "assets/images/ic_edit_profile.png",
+                  width: 32,
+                  height: 32,
+                ),
                 title: Text(
                   'Data Pribadi',
                   style: AppStyles.textBlackColor.copyWith(
@@ -60,7 +72,11 @@ class ProfilePage extends StatelessWidget {
               ),
               Divider(),
               ListTile(
-                leading: Icon(Icons.settings),
+                leading: Image.asset(
+                  "assets/images/ic_pengaturan.png",
+                  width: 32,
+                  height: 32,
+                ),
                 title: Text(
                   'Pengaturan',
                   style: AppStyles.textBlackColor.copyWith(
@@ -72,7 +88,11 @@ class ProfilePage extends StatelessWidget {
               ),
               Divider(),
               ListTile(
-                leading: Icon(Icons.info),
+                leading: Image.asset(
+                  "assets/images/ic_tentang.png",
+                  width: 32,
+                  height: 32,
+                ),
                 title: Text(
                   'Tentang Kami',
                   style: AppStyles.textBlackColor.copyWith(
@@ -81,10 +101,18 @@ class ProfilePage extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
+                onTap: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context) => tentangPage()));
+                },
               ),
               Divider(),
               ListTile(
-                leading: Icon(Icons.logout),
+                leading: Image.asset(
+                  "assets/images/ic_keluar.png",
+                  width: 32,
+                  height: 32,
+                ),
                 title: Text(
                   'Keluar',
                   style: AppStyles.textBlackColor.copyWith(
@@ -93,6 +121,10 @@ class ProfilePage extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
+                onTap: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context) => LoginPage()));
+                },
               ),
               Divider(),
             ],

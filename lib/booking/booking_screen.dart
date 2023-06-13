@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
+import 'package:pa_rentalcam/detail_camera/detail_camera_screen.dart';
 import 'package:pa_rentalcam/screens/auth/add_profil_screen.dart';
 
 class BookingPage extends StatelessWidget {
@@ -16,7 +17,14 @@ class BookingPage extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Image.asset("assets/images/back.png"),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          DetailPage()));
+                            },
+                            child: Image.asset("assets/images/back.png")),
                         SizedBox(
                           width: 130,
                         ),
@@ -24,7 +32,7 @@ class BookingPage extends StatelessWidget {
                           'Booking',
                           style: AppStyles.textBlackColor.copyWith(
                             fontSize: 18,
-                            fontWeight: AppStyles.medium,
+                            fontWeight: AppStyles.semiBold,
                             color: Colors.black,
                           ),
                         ),
@@ -242,7 +250,7 @@ class BookingPage extends StatelessWidget {
                                   ),
                                   Spacer(),
                                   Text(
-                                    'Rp600.000',
+                                    'Rp350.000',
                                     style: AppStyles.textBlackColor.copyWith(
                                       fontSize: 16,
                                       fontWeight: AppStyles.semiBold,
@@ -288,9 +296,6 @@ class BookingPage extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(18),
-                            color: Colors.black),
                         width: 104,
                         height: 40,
                         child: ElevatedButton(
