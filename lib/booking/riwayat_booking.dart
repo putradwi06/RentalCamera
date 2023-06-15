@@ -111,19 +111,16 @@ class _MyHomePageState extends State<MyHomePage>
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  Center(
-                    child: Container(
-                      margin: EdgeInsets.all(24),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: Colors.white,
-                      ),
-                      padding: EdgeInsets.all(16.0),
+                  Container(
+                    margin: EdgeInsets.all(24),
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18),
+                      color: Colors.white,
+                    ),
+                    child: Center(
                       child: SizedBox(
-                        width: 382,
-                        height: 200,
                         child: Container(
-                          padding: EdgeInsets.all(16.0),
                           child: Column(
                             children: [
                               Column(
@@ -176,12 +173,12 @@ class _MyHomePageState extends State<MyHomePage>
                                 ],
                               ),
                               SizedBox(
-                                height: 3,
+                                height: 8,
                               ),
                               Column(
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.all(16),
+                                    padding: EdgeInsets.all(6),
                                     child: Row(
                                       children: [
                                         Text(
@@ -214,17 +211,15 @@ class _MyHomePageState extends State<MyHomePage>
                       ),
                     ),
                   ),
-                  Center(
-                    child: Container(
-                      margin: EdgeInsets.all(24),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: Colors.white,
-                      ),
-                      padding: EdgeInsets.all(16.0),
+                  Container(
+                    margin: EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18),
+                      color: Colors.white,
+                    ),
+                    padding: EdgeInsets.all(16.0),
+                    child: Center(
                       child: SizedBox(
-                        width: 382,
-                        height: 200,
                         child: Container(
                           padding: EdgeInsets.all(16.0),
                           child: Column(
@@ -279,12 +274,12 @@ class _MyHomePageState extends State<MyHomePage>
                                 ],
                               ),
                               SizedBox(
-                                height: 3,
+                                height: 8,
                               ),
                               Column(
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.all(24),
+                                    margin: EdgeInsets.all(6),
                                     child: Row(
                                       children: [
                                         Text(
@@ -326,8 +321,6 @@ class _MyHomePageState extends State<MyHomePage>
                       ),
                       padding: EdgeInsets.all(16.0),
                       child: SizedBox(
-                        width: 382,
-                        height: 200,
                         child: Container(
                           padding: EdgeInsets.all(16.0),
                           child: Column(
@@ -382,16 +375,16 @@ class _MyHomePageState extends State<MyHomePage>
                                 ],
                               ),
                               SizedBox(
-                                height: 3,
+                                height: 8,
                               ),
                               Column(
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.all(16),
+                                    padding: EdgeInsets.all(6),
                                     child: Row(
                                       children: [
                                         Text(
-                                          'Belum Dibayar',
+                                          'Selesai',
                                           style:
                                               AppStyles.textBlackColor.copyWith(
                                             fontSize: 16,

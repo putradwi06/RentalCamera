@@ -3,7 +3,23 @@ import 'package:pa_rentalcam/app/styles/app_styles.dart';
 import 'package:pa_rentalcam/detail_camera/detail_camera_screen.dart';
 import 'package:pa_rentalcam/screens/auth/add_profil_screen.dart';
 
-class BookingPage extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: BookingPage(),
+    );
+  }
+}
+
+class BookingPage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<BookingPage> {
+  int _selectedButtonIndex = -1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +39,7 @@ class BookingPage extends StatelessWidget {
                             },
                             child: Image.asset("assets/images/back.png")),
                         SizedBox(
-                          width: 130,
+                          width: 110,
                         ),
                         Text(
                           'Booking',
@@ -38,18 +54,16 @@ class BookingPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 38,
-              ),
+              // SizedBox(
+              //   height: 20,
+              // ),
               Container(
+                margin: EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
                   color: Colors.white,
                 ),
-                padding: EdgeInsets.all(16.0),
                 child: SizedBox(
-                  width: 382,
-                  height: 200,
                   child: Container(
                     padding: EdgeInsets.all(16.0),
                     child: Column(
@@ -151,18 +165,16 @@ class BookingPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 14,
-              ),
+              // SizedBox(
+              //   height: 6,
+              // ),
               Container(
+                margin: EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
                   color: Colors.white,
                 ),
-                padding: EdgeInsets.all(16.0),
                 child: SizedBox(
-                  width: 382,
-                  height: 200,
                   child: Container(
                     padding: EdgeInsets.all(16.0),
                     child: Column(
@@ -191,7 +203,7 @@ class BookingPage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Sony A6000',
+                                      'Canon Y400',
                                       style: AppStyles.textBlackColor.copyWith(
                                         fontSize: 18,
                                         fontWeight: AppStyles.medium,
@@ -199,7 +211,7 @@ class BookingPage extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      '325 MP APS-CCosmos',
+                                      'APS-C Cosmos',
                                       style: AppStyles.textBlackColor.copyWith(
                                         fontSize: 14,
                                         fontWeight: AppStyles.medium,
@@ -264,12 +276,12 @@ class BookingPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 26),
+              // SizedBox(height: 26),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8),
+                  Container(
+                    margin: EdgeInsets.all(24),
                     child: Column(
                       children: [
                         Text(
@@ -285,130 +297,60 @@ class BookingPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              // SizedBox(height: 16),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.0),
                   child: Row(
                     children: [
-                      Container(
-                        width: 104,
-                        height: 40,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            side: const BorderSide(color: Colors.black),
-                          ),
-                          onPressed: () {},
-                          child: Text(
-                            '24 Jam',
-                            style: AppStyles.textBlackColor.copyWith(
-                              fontSize: 16,
-                              fontWeight: AppStyles.reguler,
-                              color: Colors.black,
+                      for (int i = 0; i < 6; i++)
+                        GestureDetector(
+                          onTap: () {
+                            setState(
+                              () {
+                                _selectedButtonIndex = i;
+                              },
+                            );
+                          },
+                          child: Container(
+                            width: 100,
+                            height: 40,
+                            margin: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
+                              color: _selectedButtonIndex == i
+                                  ? Color(0xffFBA651)
+                                  : Colors.white,
+                              border: Border.all(color: Color(0xffEBE1D8)),
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${i + 1} Hari',
+                                style: AppStyles.textBlackColor.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: AppStyles.reguler,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(width: 16.0),
-                      SizedBox(
-                        width: 104,
-                        height: 40,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xffFBA651),
-                            side: const BorderSide(color: Colors.black),
-                          ),
-                          onPressed: () {},
-                          child: Text(
-                            '2 Hari',
-                            style: AppStyles.textBlackColor.copyWith(
-                              fontSize: 16,
-                              fontWeight: AppStyles.reguler,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 16.0),
-                      SizedBox(
-                        width: 104,
-                        height: 40,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            side: const BorderSide(color: Colors.black),
-                          ),
-                          onPressed: () {},
-                          child: Text(
-                            '3 Hari',
-                            style: AppStyles.textBlackColor.copyWith(
-                              fontSize: 16,
-                              fontWeight: AppStyles.reguler,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 16.0),
-                      SizedBox(
-                        width: 104,
-                        height: 40,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            side: const BorderSide(color: Colors.black),
-                          ),
-                          onPressed: () {},
-                          child: Text(
-                            '7 Hari',
-                            style: AppStyles.textBlackColor.copyWith(
-                              fontSize: 16,
-                              fontWeight: AppStyles.reguler,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 16.0),
-                      SizedBox(
-                        width: 104,
-                        height: 40,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            side: const BorderSide(color: Colors.black),
-                          ),
-                          onPressed: () {},
-                          child: Text(
-                            '7 Hari',
-                            style: AppStyles.textBlackColor.copyWith(
-                              fontSize: 16,
-                              fontWeight: AppStyles.reguler,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
               ),
-              SizedBox(
-                height: 30,
-              ),
+              // SizedBox(
+              //   height: 30,
+              // ),
               Container(
+                margin: EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
                   color: Colors.white,
                 ),
-                padding: EdgeInsets.all(16.0),
                 child: SizedBox(
-                  width: 382,
-                  height: 200,
                   child: Container(
-                    color: Colors.white,
                     padding: EdgeInsets.all(16.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -432,9 +374,9 @@ class BookingPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 13,
-                        ),
+                        // SizedBox(
+                        //   height: 13,
+                        // ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -533,18 +475,15 @@ class BookingPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 16.0),
+              // SizedBox(height: 16.0),
               Container(
+                margin: EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
                   color: Colors.white,
                 ),
-                padding: EdgeInsets.all(16.0),
                 child: SizedBox(
-                  width: 382,
-                  height: 250,
                   child: Container(
-                    color: Colors.white,
                     padding: EdgeInsets.all(16.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -582,6 +521,9 @@ class BookingPage extends StatelessWidget {
                                     'assets/images/bca.png',
                                     width: 40,
                                     height: 40,
+                                  ),
+                                  SizedBox(
+                                    width: 8,
                                   ),
                                   Column(
                                     crossAxisAlignment:
@@ -634,6 +576,9 @@ class BookingPage extends StatelessWidget {
                                     'assets/images/ic_bri.jpg',
                                     width: 40,
                                     height: 40,
+                                  ),
+                                  SizedBox(
+                                    width: 8,
                                   ),
                                   Column(
                                     crossAxisAlignment:
@@ -688,6 +633,9 @@ class BookingPage extends StatelessWidget {
                                     width: 40,
                                     height: 40,
                                   ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -731,7 +679,7 @@ class BookingPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              // SizedBox(height: 30),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -772,7 +720,7 @@ class BookingPage extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 10,
-                  )
+                  ),
                 ],
               ),
             ],

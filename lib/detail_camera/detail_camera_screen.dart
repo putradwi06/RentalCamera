@@ -32,7 +32,7 @@ final CameraModel camera;
                             },
                             child: Image.asset("assets/images/back.png")),
                         SizedBox(
-                          width: 130,
+                          width: 90,
                         ),
                         Text(
                           'Detail Kamera',
