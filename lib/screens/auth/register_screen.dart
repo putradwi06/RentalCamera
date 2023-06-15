@@ -1,9 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pa_rentalcam/app/styles/app_colors.dart';
-import 'package:lottie/lottie.dart';
-
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
+import 'package:pa_rentalcam/data/model/user_model.dart';
+import 'package:pa_rentalcam/data/repository/repository.dart';
 import 'package:pa_rentalcam/screens/auth/add_profil_screen.dart';
 import 'package:pa_rentalcam/screens/auth/login_screen.dart';
 
@@ -12,6 +12,13 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _fullNameController = TextEditingController();
+    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController _phoneNumberController =
+        TextEditingController();
+    final TextEditingController _password1Controller = TextEditingController();
+    final TextEditingController _password2Controller = TextEditingController();
+
     return Scaffold(
       backgroundColor: Color(0XFFFAFAFA),
       body: SafeArea(
@@ -75,6 +82,53 @@ class RegisterPage extends StatelessWidget {
                           Container(
                             width: double.infinity,
                             child: TextField(
+                              controller: _fullNameController,
+                              style: AppStyles.textBlackColor
+                                  .copyWith(fontSize: 14),
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                contentPadding: EdgeInsets.all(10),
+                                hintStyle: AppStyles.textGrey2Color
+                                    .copyWith(fontSize: 14),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                  borderSide: BorderSide(
+                                    color: AppColors.orangeColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 32),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Nomor Telepon",
+                            style: AppStyles.textBlackColor.copyWith(
+                              fontSize: 14,
+                              fontWeight: AppStyles.semiBold,
+                              color: Color(0xff191410),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Container(
+                            width: double.infinity,
+                            child: TextField(
+                              controller: _phoneNumberController,
+                              keyboardType: TextInputType.number,
                               style: AppStyles.textBlackColor
                                   .copyWith(fontSize: 14),
                               decoration: InputDecoration(
@@ -119,6 +173,7 @@ class RegisterPage extends StatelessWidget {
                           Container(
                             width: double.infinity,
                             child: TextField(
+                              controller: _emailController,
                               style: AppStyles.textBlackColor
                                   .copyWith(fontSize: 14),
                               decoration: InputDecoration(
@@ -128,7 +183,6 @@ class RegisterPage extends StatelessWidget {
                                 contentPadding: EdgeInsets.all(10),
                                 hintStyle: AppStyles.textGrey2Color
                                     .copyWith(fontSize: 14),
-                                hintText: "putra@gmail.com",
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(18),
                                   borderSide: BorderSide(
@@ -164,6 +218,8 @@ class RegisterPage extends StatelessWidget {
                           Container(
                             width: double.infinity,
                             child: TextField(
+                              obscureText: true,
+                              controller: _password1Controller,
                               style: AppStyles.textBlackColor
                                   .copyWith(fontSize: 14),
                               decoration: InputDecoration(
@@ -208,6 +264,8 @@ class RegisterPage extends StatelessWidget {
                           Container(
                             width: double.infinity,
                             child: TextField(
+                              obscureText: true,
+                              controller: _password2Controller,
                               style: AppStyles.textBlackColor
                                   .copyWith(fontSize: 14),
                               decoration: InputDecoration(
@@ -243,7 +301,41 @@ class RegisterPage extends StatelessWidget {
                               height: 50,
                               margin: EdgeInsets.symmetric(horizontal: 55),
                               child: MaterialButton(
-                                onPressed: () {
+                                onPressed: () async {
+                                  if (_password1Controller.text ==
+                                      _password2Controller.text) {
+                                    await Repository().createUser(UserModel(
+                                        id: "",
+                                        fullName: _fullNameController.text,
+                                        phoneNumber:
+                                            _phoneNumberController.text,
+                                        email: _emailController.text));
+
+                                    await FirebaseAuth.instance
+                                        .createUserWithEmailAndPassword(
+                                            email: _emailController.text,
+                                            password:
+                                                _password1Controller.text);
+
+                                    await FirebaseAuth.instance
+                                        .signInWithEmailAndPassword(
+                                        email: _emailController.text,
+                                        password:
+                                        _password1Controller.text);
+                                  } else {
+                                    final snackBar = SnackBar(
+                                      content: const Text(
+                                          'Password yang dimasukkan tidak sesuai!'),
+                                      backgroundColor: (Colors.black12),
+                                      action: SnackBarAction(
+                                        label: 'dismiss',
+                                        onPressed: () {},
+                                      ),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  }
+
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(

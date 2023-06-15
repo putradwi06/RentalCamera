@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pa_rentalcam/booking/booking_screen.dart';
 import 'package:pa_rentalcam/booking/riwayat_booking.dart';
@@ -13,7 +14,14 @@ import 'package:pa_rentalcam/screens/home/home_screen.dart';
 import 'package:pa_rentalcam/screens/home/search.dart';
 import 'package:pa_rentalcam/splashScreen/splash_screen.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(MyApp());
 }
 

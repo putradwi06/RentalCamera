@@ -19,10 +19,7 @@ class BookingPage extends StatelessWidget {
                       children: [
                         GestureDetector(
                             onTap: () {
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          DetailPage()));
+                              Navigator.pop(context);
                             },
                             child: Image.asset("assets/images/back.png")),
                         SizedBox(
