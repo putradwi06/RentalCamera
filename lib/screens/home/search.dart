@@ -43,11 +43,11 @@ class search extends StatelessWidget {
                 ],
               ),
               Container(
+                margin: EdgeInsets.all(24),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(18),
                 ),
-                margin: EdgeInsets.all(24),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -66,7 +66,7 @@ class search extends StatelessWidget {
                                   height: 70,
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
+                                    borderRadius: BorderRadius.circular(18),
                                     image: DecorationImage(
                                       image: AssetImage(
                                           "assets/images/camera_1.jpg"),
@@ -87,6 +87,9 @@ class search extends StatelessWidget {
                                         fontWeight: AppStyles.medium,
                                         color: Colors.black,
                                       ),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
                                     ),
                                     Text(
                                       '325 MP APS-CCosmos',
@@ -126,7 +129,7 @@ class search extends StatelessWidget {
                                 height: 70,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
+                                    borderRadius: BorderRadius.circular(18),
                                     image: DecorationImage(
                                       image: AssetImage(
                                           "assets/images/camera_1.jpg"),
@@ -140,15 +143,18 @@ class search extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Sony A6000',
+                                    'Canon EOS R5',
                                     style: AppStyles.textBlackColor.copyWith(
                                       fontSize: 18,
                                       fontWeight: AppStyles.medium,
                                       color: Colors.black,
                                     ),
                                   ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
                                   Text(
-                                    '325 MP APS-CCosmos',
+                                    'Wireless 442MHz',
                                     style: AppStyles.textBlackColor.copyWith(
                                       fontSize: 14,
                                       fontWeight: AppStyles.medium,
@@ -184,7 +190,7 @@ class search extends StatelessWidget {
                                 height: 70,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(18),
                                   image: DecorationImage(
                                     image: AssetImage(
                                         "assets/images/camera_1.jpg"),
@@ -199,15 +205,18 @@ class search extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Sony A6000',
+                                    'Fujifilm X-T4',
                                     style: AppStyles.textBlackColor.copyWith(
                                       fontSize: 18,
                                       fontWeight: AppStyles.medium,
                                       color: Colors.black,
                                     ),
                                   ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
                                   Text(
-                                    '325 MP APS-CCosmos',
+                                    '20.1 MP Compact',
                                     style: AppStyles.textBlackColor.copyWith(
                                       fontSize: 14,
                                       fontWeight: AppStyles.medium,
