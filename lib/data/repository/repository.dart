@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:pa_rentalcam/data/model/camera_model.dart';
 import 'package:pa_rentalcam/data/model/user_model.dart';
 
@@ -24,7 +25,8 @@ class Repository {
   }
 
   Future<bool> createUser(UserModel user) async {
-    final userId = _firestore.collection("Users").id;
+    final userId = _firestore.collection("Users").doc().id;
+    debugPrint("userId: $userId");
     await _firestore.collection("Users").doc(userId).set(user.copyWith(id: userId).toMap());
     return true;
   }
