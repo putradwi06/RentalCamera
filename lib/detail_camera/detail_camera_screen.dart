@@ -13,7 +13,10 @@ class DetailPage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.only(
+                  top: 38,
+                  bottom: 38,
+                ),
                 child: Row(
                   children: [
                     Row(
@@ -25,16 +28,18 @@ class DetailPage extends StatelessWidget {
                                       builder: (BuildContext context) =>
                                           DashboardScreen()));
                             },
-                            child: Image.asset("assets/images/back.png")),
-                        SizedBox(
-                          width: 90,
-                        ),
-                        Text(
-                          'Detail Kamera',
-                          style: AppStyles.textBlackColor.copyWith(
-                            fontSize: 18,
-                            fontWeight: AppStyles.semiBold,
-                            color: Colors.black,
+                            child: Container(
+                                margin: EdgeInsets.only(left: 24),
+                                child: Image.asset("assets/images/back.png"))),
+                        Container(
+                          margin: EdgeInsets.only(left: 86, right: 149),
+                          child: Text(
+                            'Detail Kamera',
+                            style: AppStyles.textBlackColor.copyWith(
+                              fontSize: 18,
+                              fontWeight: AppStyles.semiBold,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ],
@@ -43,7 +48,7 @@ class DetailPage extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(16.0),
+                margin: EdgeInsets.only(left: 24, right: 24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
