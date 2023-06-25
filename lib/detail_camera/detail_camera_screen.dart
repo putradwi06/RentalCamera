@@ -7,7 +7,7 @@ import 'package:pa_rentalcam/data/model/camera_model.dart';
 import 'package:pa_rentalcam/screens/home/home_screen.dart';
 
 class DetailPage extends StatelessWidget {
-final CameraModel camera;
+  final CameraModel camera;
   DetailPage({required this.camera});
 
   @override
@@ -28,16 +28,17 @@ final CameraModel camera;
                       children: [
                         GestureDetector(
                             onTap: () {
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          DashboardScreen()));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      DashboardScreen()));
                             },
                             child: Container(
                                 margin: EdgeInsets.only(left: 24),
                                 child: Image.asset("assets/images/back.png"))),
                         Container(
-                          margin: EdgeInsets.only(left: 86, right: 149),
+                          margin: EdgeInsets.only(
+                            left: 86,
+                          ),
                           child: Text(
                             'Detail Kamera',
                             style: AppStyles.textBlackColor.copyWith(
@@ -169,10 +170,9 @@ final CameraModel camera;
                         height: 50,
                         child: MaterialButton(
                           onPressed: () {
-                            Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        BookingPage()));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    BookingPage()));
                           },
                           child: Container(
                             padding: EdgeInsets.all(10),

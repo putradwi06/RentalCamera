@@ -6,28 +6,29 @@ import 'package:pa_rentalcam/data/model/user_model.dart';
 class Repository {
   final FirebaseFirestore _firestore;
 
-  static final Repository _singleton =
-  Repository._internal();
+  static final Repository _singleton = Repository._internal();
 
   factory Repository() => _singleton;
 
   Repository._internal() : _firestore = FirebaseFirestore.instance;
 
-
   Stream<List<CameraModel>> getListCamera() {
-    final getBookings = _firestore.collection("Cameras"); // Bookings
+    final getBookings = _firestore.collection("Cameras");
 
     return getBookings
         .snapshots()
         .map((documents) => documents.docs.map((document) {
-      return CameraModel.fromMap(document.data());
-    }).toList());
+              return CameraModel.fromMap(document.data());
+            }).toList());
   }
 
   Future<bool> createUser(UserModel user) async {
     final userId = _firestore.collection("Users").doc().id;
     debugPrint("userId: $userId");
-    await _firestore.collection("Users").doc(userId).set(user.copyWith(id: userId).toMap());
+    await _firestore
+        .collection("Users")
+        .doc(userId)
+        .set(user.copyWith(id: userId).toMap());
     return true;
   }
 }

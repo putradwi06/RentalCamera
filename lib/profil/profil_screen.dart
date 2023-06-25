@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
+import 'package:pa_rentalcam/profil/pengaturan.dart';
 import 'package:pa_rentalcam/profil/tentang.dart';
 import 'package:pa_rentalcam/screens/auth/login_screen.dart';
 
@@ -85,6 +86,10 @@ class ProfilePage extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
+                onTap: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context) => Pengaturan()));
+                },
               ),
               Divider(),
               ListTile(

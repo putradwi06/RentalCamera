@@ -30,7 +30,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
       backgroundColor: Colors.white,
       body: Center(
         child: Image.asset(
-          "assets/images/logo_mbgcam.png",
+          "assets/images/mbg_logo1.png",
           width: 1000,
           height: 500,
         ),
