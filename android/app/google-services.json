@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "336287873014",
+    "project_id": "rental-camera-project",
+    "storage_bucket": "rental-camera-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336287873014:android:d52d8a9cd961d41aab39d7",
+        "android_client_info": {
+          "package_name": "com.example.pa_rentalcam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336287873014-o8sv8us9gv9hngf6p2e802cf8e4q660c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD71RYhmIBn-ZhpUrEEaCj1H_hP-fKBq4Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336287873014-o8sv8us9gv9hngf6p2e802cf8e4q660c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

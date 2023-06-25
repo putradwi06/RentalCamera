@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
+import 'package:pa_rentalcam/app/utils.dart';
 import 'package:pa_rentalcam/booking/booking_screen.dart';
 import 'package:pa_rentalcam/dashboard_screen.dart';
+import 'package:pa_rentalcam/data/model/camera_model.dart';
 import 'package:pa_rentalcam/screens/home/home_screen.dart';
 
 class DetailPage extends StatelessWidget {
+final CameraModel camera;
+  DetailPage({required this.camera});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +28,7 @@ class DetailPage extends StatelessWidget {
                       children: [
                         GestureDetector(
                             onTap: () {
-                              Navigator.of(context).pushReplacement(
+                              Navigator.of(context).push(
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
                                           DashboardScreen()));
@@ -56,7 +61,7 @@ class DetailPage extends StatelessWidget {
                     Container(
                       decoration: new BoxDecoration(
                         image: new DecorationImage(
-                          image: new AssetImage("assets/images/camera_3.png"),
+                          image: NetworkImage(camera.picture),
                         ),
                         color: Color(0xffD9D9D9),
                         borderRadius: BorderRadius.circular(18),
@@ -65,7 +70,7 @@ class DetailPage extends StatelessWidget {
                     ),
                     SizedBox(height: 30),
                     Text(
-                      'Canon Y400',
+                      camera.title,
                       style: AppStyles.textBlackColor.copyWith(
                         fontSize: 24,
                         fontWeight: AppStyles.semiBold,
@@ -73,7 +78,7 @@ class DetailPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'APS-5 Cosmos',
+                      camera.subTitle,
                       style: AppStyles.textBlackColor.copyWith(
                         fontSize: 16,
                         fontWeight: AppStyles.reguler,
@@ -82,7 +87,7 @@ class DetailPage extends StatelessWidget {
                     ),
                     SizedBox(height: 26),
                     Text(
-                      'Deskripsi',
+                      "Deskripsi",
                       style: AppStyles.textBlackColor.copyWith(
                         fontSize: 16,
                         fontWeight: AppStyles.semiBold,
@@ -90,7 +95,7 @@ class DetailPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Memiliki desain yang kokoh dan ergonomis, serta dilengkapi dengan berbagai fitur dan teknologi terbaru. Kamera ini memiliki sensor gambar yang besar dan berkualitas tinggi yang memungkinkan pengguna untuk mengambil foto dengan detail yang tajam dan warna yang akurat.',
+                      camera.description,
                       style: AppStyles.textBlackColor.copyWith(
                         fontSize: 16,
                         fontWeight: AppStyles.reguler,
@@ -103,6 +108,9 @@ class DetailPage extends StatelessWidget {
                         Image.asset(
                           'assets/images/Chart.png',
                         ),
+                        SizedBox(
+                          width: 2,
+                        ),
                         Text(
                           'Stok Tersisa:',
                           style: AppStyles.textBlackColor.copyWith(
@@ -114,7 +122,7 @@ class DetailPage extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          '6',
+                          camera.stock.toString(),
                           style: AppStyles.textBlackColor.copyWith(
                             fontSize: 16,
                             fontWeight: AppStyles.semiBold,
@@ -137,7 +145,7 @@ class DetailPage extends StatelessWidget {
                       children: [
                         SizedBox(height: 8.0),
                         Text(
-                          'Rp. 300.000',
+                          konversiKeRupiah(camera.price),
                           style: AppStyles.textBlackColor.copyWith(
                             fontSize: 22,
                             fontWeight: AppStyles.semiBold,
@@ -161,7 +169,7 @@ class DetailPage extends StatelessWidget {
                         height: 50,
                         child: MaterialButton(
                           onPressed: () {
-                            Navigator.of(context).pushReplacement(
+                            Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
                                         BookingPage()));

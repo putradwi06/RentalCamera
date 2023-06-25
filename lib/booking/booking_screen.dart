@@ -28,17 +28,14 @@ class _MyHomePageState extends State<BookingPage> {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.symmetric(horizontal: 24, vertical: 30),
                 child: Row(
                   children: [
                     Row(
                       children: [
                         GestureDetector(
                             onTap: () {
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          DetailPage()));
+                              Navigator.pop(context);
                             },
                             child: Image.asset("assets/images/back.png")),
                         SizedBox(
@@ -57,11 +54,8 @@ class _MyHomePageState extends State<BookingPage> {
                   ],
                 ),
               ),
-              // SizedBox(
-              //   height: 20,
-              // ),
               Container(
-                margin: EdgeInsets.all(24),
+                margin: EdgeInsets.only(left: 24, right: 24, bottom: 14),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
                   color: Colors.white,
@@ -172,7 +166,7 @@ class _MyHomePageState extends State<BookingPage> {
               //   height: 6,
               // ),
               Container(
-                margin: EdgeInsets.all(24),
+                margin: EdgeInsets.only(left: 24, right: 24, bottom: 26),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
                   color: Colors.white,
