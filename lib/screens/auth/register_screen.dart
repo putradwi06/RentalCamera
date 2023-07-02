@@ -304,18 +304,21 @@ class RegisterPage extends StatelessWidget {
                                 onPressed: () async {
                                   if (_password1Controller.text ==
                                       _password2Controller.text) {
-                                    await Repository().createUser(UserModel(
-                                        id: "",
-                                        fullName: _fullNameController.text,
-                                        phoneNumber:
-                                            _phoneNumberController.text,
-                                        email: _emailController.text));
 
                                     await FirebaseAuth.instance
                                         .createUserWithEmailAndPassword(
                                             email: _emailController.text,
                                             password:
                                                 _password1Controller.text);
+
+                                    final userId = FirebaseAuth.instance.currentUser!.uid;
+
+                                    await Repository().createUser(UserModel(
+                                        id: userId,
+                                        fullName: _fullNameController.text,
+                                        phoneNumber:
+                                        _phoneNumberController.text,
+                                        email: _emailController.text));
 
                                     await FirebaseAuth.instance
                                         .signInWithEmailAndPassword(

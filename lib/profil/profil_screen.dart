@@ -1,9 +1,13 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pa_rentalcam/profil/pengaturan.dart';
+
+import '../screens/auth/login_screen.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -143,7 +147,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 onTap: () {
-                  // Navigasi ke halaman pengaturan
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context) => Pengaturan()));
                 },
               ),
               Divider(),
@@ -180,8 +185,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: Colors.black,
                   ),
                 ),
-                onTap: () {
-                  // Logout pengguna
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context) => LoginPage()));
                 },
               ),
               Divider(),

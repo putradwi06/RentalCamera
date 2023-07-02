@@ -20,8 +20,7 @@ class HomePage extends StatelessWidget {
         child: StreamBuilder(
           stream: Repository().getListCamera(),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            debugPrint("state: ${snapshot.stackTrace}");
-            if (!snapshot.hasData) {
+            if (snapshot.data == null) {
               return const Center(child: CircularProgressIndicator());
             }
 
@@ -211,70 +210,73 @@ class HomePage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24.0),
                       child: SizedBox(
-                        height: 500,
+                        height: 350,
                         child: ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          itemCount: 6,
-                          itemBuilder: (_, index) {
-                            return Container(
-                              height: 90,
-                              margin: EdgeInsets.only(bottom: 16),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(18),
-                                color: AppColors.whiteColor,
-                              ),
-                              padding: EdgeInsets.all(10),
-                              child: Row(
-                                children: [
-                                  Column(
+                            physics: BouncingScrollPhysics(),
+                            itemCount: listCamera.length,
+                            reverse: true,
+                            itemBuilder: (_, index) {
+                              final camera = listCamera[index];
+                              return GestureDetector(
+                                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => DetailPage(camera: camera))),
+                                child: Container(
+                                  height: 90,
+                                  margin: EdgeInsets.only(bottom: 16),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(18),
+                                    color: AppColors.whiteColor,
+                                  ),
+                                  padding: EdgeInsets.all(10),
+                                  child: Row(
                                     children: [
-                                      SizedBox(
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(18),
-                                          child: Image.asset(
-                                            "assets/images/camera1.png",
-                                            fit: BoxFit.cover,
+                                      Column(
+                                        children: [
+                                          SizedBox(
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(18),
+                                              child: Image.network(
+                                                camera.picture,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            height: 70,
+                                            width: 70,
                                           ),
-                                        ),
-                                        height: 70,
-                                        width: 70,
+                                        ],
+                                      ),
+                                      SizedBox(width: 16.0),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            camera.title,
+                                            style:
+                                                AppStyles.textBlackColor.copyWith(
+                                              fontSize: 18,
+                                              fontWeight: AppStyles.medium,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          Text(
+                                            camera.subTitle,
+                                            style:
+                                                AppStyles.textBlackColor.copyWith(
+                                              fontSize: 14,
+                                              fontWeight: AppStyles.medium,
+                                              color: Color(0xffADA8A4),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
                                       ),
                                     ],
                                   ),
-                                  SizedBox(width: 16.0),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Sony A6000',
-                                        style:
-                                            AppStyles.textBlackColor.copyWith(
-                                          fontSize: 18,
-                                          fontWeight: AppStyles.medium,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      Text(
-                                        '325 MP APS-CCosmos',
-                                        style:
-                                            AppStyles.textBlackColor.copyWith(
-                                          fontSize: 14,
-                                          fontWeight: AppStyles.medium,
-                                          color: Color(0xffADA8A4),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
+                                ),
+                              );
+                            }),
                       ),
                     ),
                   ],

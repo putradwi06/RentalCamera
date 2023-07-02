@@ -29,7 +29,7 @@ class UserModel {
       fullName: map['fullName'] as String,
       phoneNumber: map['phoneNumber'] as String,
       email: map['email'] as String,
-      profilePicture: map['profilePicture'] as String,
+      profilePicture: map['profilePicture'] != null ? map['profilePicture'] as String : null,
     );
   }
 
