@@ -1,10 +1,61 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:pa_rentalcam/app/styles/app_styles.dart';
-import 'package:pa_rentalcam/profil/pengaturan.dart';
-import 'package:pa_rentalcam/profil/tentang.dart';
-import 'package:pa_rentalcam/screens/auth/login_screen.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  User? currentUser;
+  String? profileImageUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  Future<void> getCurrentUser() async {
+    currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser!.uid)
+          .get();
+      setState(() {
+        profileImageUrl = snapshot['profileImageUrl'];
+      });
+    }
+  }
+
+  Future<void> _pickImageFromGallery() async {
+    final pickedImage =
+        await ImagePicker().getImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      await _uploadImageToFirebase(pickedImage.path);
+    }
+  }
+
+  Future<void> _uploadImageToFirebase(String imagePath) async {
+    final firebaseStorageRef = firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('profile_images/${currentUser!.uid}.jpg');
+    await firebaseStorageRef.putFile(File(imagePath));
+    final imageUrl = await firebaseStorageRef.getDownloadURL();
+    setState(() {
+      profileImageUrl = imageUrl;
+    });
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser!.uid)
+        .update({'profileImageUrl': imageUrl});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,9 +69,9 @@ class ProfilePage extends StatelessWidget {
               SizedBox(height: 30),
               Text(
                 'Profile',
-                style: AppStyles.textBlackColor.copyWith(
+                style: TextStyle(
                   fontSize: 18,
-                  fontWeight: AppStyles.semiBold,
+                  fontWeight: FontWeight.bold,
                   color: Color(0xff191410),
                 ),
                 textAlign: TextAlign.center,
@@ -28,19 +79,25 @@ class ProfilePage extends StatelessWidget {
               SizedBox(height: 58),
               Column(
                 children: [
-                  Image.asset(
-                    "assets/images/add_profile.png",
-                    width: 120,
-                    height: 120,
+                  GestureDetector(
+                    onTap: () {
+                      _pickImageFromGallery();
+                    },
+                    child: CircleAvatar(
+                      backgroundImage: profileImageUrl != null
+                          ? NetworkImage(profileImageUrl!)
+                          : AssetImage("assets/images/add_profile.png"),
+                      radius: 60,
+                    ),
                   ),
                 ],
               ),
               SizedBox(height: 20),
               Text(
                 'Putra DwiS',
-                style: AppStyles.textBlackColor.copyWith(
+                style: TextStyle(
                   fontSize: 16,
-                  fontWeight: AppStyles.semiBold,
+                  fontWeight: FontWeight.bold,
                   color: Color(0xff191410),
                 ),
                 textAlign: TextAlign.center,
@@ -48,9 +105,8 @@ class ProfilePage extends StatelessWidget {
               SizedBox(height: 4),
               Text(
                 'putradwi@gmail.com',
-                style: AppStyles.textBlackColor.copyWith(
+                style: TextStyle(
                   fontSize: 16,
-                  fontWeight: AppStyles.reguler,
                   color: Color(0xffADA8A4),
                 ),
                 textAlign: TextAlign.center,
@@ -64,9 +120,9 @@ class ProfilePage extends StatelessWidget {
                 ),
                 title: Text(
                   'Data Pribadi',
-                  style: AppStyles.textBlackColor.copyWith(
+                  style: TextStyle(
                     fontSize: 16,
-                    fontWeight: AppStyles.reguler,
+                    fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
@@ -80,15 +136,14 @@ class ProfilePage extends StatelessWidget {
                 ),
                 title: Text(
                   'Pengaturan',
-                  style: AppStyles.textBlackColor.copyWith(
+                  style: TextStyle(
                     fontSize: 16,
-                    fontWeight: AppStyles.reguler,
+                    fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => Pengaturan()));
+                  // Navigasi ke halaman pengaturan
                 },
               ),
               Divider(),
@@ -100,15 +155,14 @@ class ProfilePage extends StatelessWidget {
                 ),
                 title: Text(
                   'Tentang Kami',
-                  style: AppStyles.textBlackColor.copyWith(
+                  style: TextStyle(
                     fontSize: 16,
-                    fontWeight: AppStyles.reguler,
+                    fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => tentangPage()));
+                  // Navigasi ke halaman tentang
                 },
               ),
               Divider(),
@@ -120,15 +174,14 @@ class ProfilePage extends StatelessWidget {
                 ),
                 title: Text(
                   'Keluar',
-                  style: AppStyles.textBlackColor.copyWith(
+                  style: TextStyle(
                     fontSize: 16,
-                    fontWeight: AppStyles.reguler,
+                    fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => LoginPage()));
+                  // Logout pengguna
                 },
               ),
               Divider(),
