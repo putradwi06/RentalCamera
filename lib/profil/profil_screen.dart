@@ -28,14 +28,14 @@ class _ProfilePageState extends State<ProfilePage> {
           .doc(currentUser!.uid)
           .get();
       setState(() {
-        profileImageUrl = snapshot['profileImageUrl'];
+        profileImageUrl = snapshot['profilePicture'];
       });
     }
   }
 
   Future<void> _pickImageFromGallery() async {
     final pickedImage =
-        await ImagePicker().getImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       await _uploadImageToFirebase(pickedImage.path);
     }
@@ -51,9 +51,9 @@ class _ProfilePageState extends State<ProfilePage> {
       profileImageUrl = imageUrl;
     });
     await FirebaseFirestore.instance
-        .collection('users')
+        .collection('Users')
         .doc(currentUser!.uid)
-        .update({'profileImageUrl': imageUrl});
+        .update({'profilePicture': imageUrl});
   }
 
   @override
@@ -83,11 +83,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     onTap: () {
                       _pickImageFromGallery();
                     },
-                    child: CircleAvatar(
-                      backgroundImage: profileImageUrl != null
-                          ? NetworkImage(profileImageUrl!)
-                          : AssetImage("assets/images/add_profile.png"),
-                      radius: 60,
+                    child: ClipRRect(
+                      child: profileImageUrl != null
+                          ? Image.network(profileImageUrl!)
+                          : Image.asset("assets/images/add_profile.png"),
+                      borderRadius: BorderRadius.circular(60),
                     ),
                   ),
                 ],
