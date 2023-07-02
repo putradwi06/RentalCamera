@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pa_rentalcam/dashboard_screen.dart';
 import 'package:pa_rentalcam/profil/profil_screen.dart';
 import '../app/styles/app_colors.dart';
 import '../app/styles/app_styles.dart';
@@ -18,6 +20,8 @@ class _PengaturanState extends State<Pengaturan> {
   bool _obscureNewPassword = true;
   bool _obscureConfirmPassword = true;
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +34,7 @@ class _PengaturanState extends State<Pengaturan> {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => ProfilePage()));
+                      builder: (BuildContext context) => DashboardScreen()));
                 },
                 child: Row(
                   children: [
@@ -103,21 +107,17 @@ class _PengaturanState extends State<Pengaturan> {
                 ),
               ),
               Container(
-                width: double
-                    .infinity, // Mengatur lebar tombol menjadi sepanjang parent
+                width: double.infinity,
                 margin: EdgeInsets.symmetric(vertical: 16),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: AppColors
-                        .orangeColor, // Mengubah warna tombol menjadi oranye
+                    primary: AppColors.orangeColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
                     ),
                   ),
                   onPressed: () {
-                    String oldPassword = _oldPasswordController.text;
-                    String newPassword = _newPasswordController.text;
-                    String confirmPassword = _confirmPasswordController.text;
+                    resetPassword();
                   },
                   child: Text('Reset Password'),
                 ),
@@ -165,5 +165,103 @@ class _PengaturanState extends State<Pengaturan> {
         ),
       ),
     );
+  }
+
+  Future<void> resetPassword() async {
+    try {
+      String oldPassword = _oldPasswordController.text;
+      String newPassword = _newPasswordController.text;
+      String confirmPassword = _confirmPasswordController.text;
+
+      // Periksa apakah password baru dan konfirmasi password sama
+      if (newPassword != confirmPassword) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content:
+                  Text('Password baru dan konfirmasi password tidak cocok.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+        return;
+      }
+
+      User? user = _auth.currentUser;
+      if (user != null) {
+        // Lakukan reautentikasi pengguna dengan password lama
+        AuthCredential credential = EmailAuthProvider.credential(
+            email: user.email!, password: oldPassword);
+        await user.reauthenticateWithCredential(credential);
+
+        // Update password baru pengguna
+        await user.updatePassword(newPassword);
+
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Sukses'),
+              content: Text('Password berhasil direset.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        // Pengguna belum masuk, mungkin perlu implementasi autentikasi terlebih dahulu
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('Pengguna belum masuk.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (e) {
+      // Tangani error yang terjadi saat reset password
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Terjadi kesalahan saat mereset password.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 }

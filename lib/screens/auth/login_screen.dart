@@ -1,12 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pa_rentalcam/app/styles/app_colors.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
-
 import 'package:pa_rentalcam/dashboard_screen.dart';
 import 'package:pa_rentalcam/screens/auth/register_screen.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _rememberMe = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkRememberMeStatus();
+  }
+
+  Future<void> _checkRememberMeStatus() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool rememberMe = prefs.getBool('rememberMe') ?? false;
+    if (rememberMe) {
+      String? email = prefs.getString('email');
+      String? password = prefs.getString('password');
+
+      _emailController.text = email!;
+      _passwordController.text = password!;
+      _rememberMe = true;
+
+      _login(email, password);
+    }
+  }
+
+  Future<void> _saveLoginStatus(String email, String password) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('rememberMe', _rememberMe);
+    if (_rememberMe) {
+      await prefs.setString('email', email);
+      await prefs.setString('password', password);
+    } else {
+      await prefs.remove('email');
+      await prefs.remove('password');
+    }
+  }
+
+  Future<void> _login(String email, String password) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+
+      String namaPengguna = ''; // Nama pengguna dari login
+
+      _saveLoginStatus(email, password); // Simpan status login
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DashboardScreen(),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Login Gagal'),
+            content: Text('Email atau password salah.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +160,7 @@ class LoginPage extends StatelessWidget {
                           height: 6,
                         ),
                         TextField(
+                          controller: _emailController,
                           style:
                               AppStyles.textBlackColor.copyWith(fontSize: 14),
                           decoration: InputDecoration(
@@ -125,6 +203,7 @@ class LoginPage extends StatelessWidget {
                           height: 6,
                         ),
                         TextField(
+                          controller: _passwordController,
                           obscureText: true,
                           style:
                               AppStyles.textBlackColor.copyWith(fontSize: 14),
@@ -162,11 +241,9 @@ class LoginPage extends StatelessWidget {
                             margin: EdgeInsets.symmetric(horizontal: 55),
                             child: MaterialButton(
                               onPressed: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            DashboardScreen()));
+                                String email = _emailController.text;
+                                String password = _passwordController.text;
+                                _login(email, password);
                               },
                               child: Container(
                                 padding: EdgeInsets.all(10),
@@ -232,9 +309,11 @@ class LoginPage extends StatelessWidget {
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          RegisterPage()));
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      RegisterPage(),
+                                ),
+                              );
                             },
                             child: Text(
                               "Registrasi",

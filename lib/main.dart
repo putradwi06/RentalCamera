@@ -6,6 +6,7 @@ import 'package:pa_rentalcam/coba.dart';
 
 import 'package:pa_rentalcam/dashboard_screen.dart';
 import 'package:pa_rentalcam/detail_camera/detail_camera_screen.dart';
+import 'package:pa_rentalcam/profil/data_pribadi.dart';
 import 'package:pa_rentalcam/profil/pengaturan.dart';
 import 'package:pa_rentalcam/profil/profil_screen.dart';
 import 'package:pa_rentalcam/screens/auth/add_profil_screen.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ProfilePage(),
+      home: SplashScreenPage(),
     );
   }
 }

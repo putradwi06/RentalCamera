@@ -31,39 +31,40 @@ class _searchState extends State<search> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                 GestureDetector(
+                  GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => DashboardScreen()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => DashboardScreen()));
                     },
                     child: Image.asset('assets/images/back.png'),
                   ),
                   const SizedBox(width: 12),
-                  widget.filter == null ? Expanded(
-                    child: TextField(
-                      autofocus: true,
-                      onChanged: (value) {
-                        setState(() {
-                          _query = value;
-                        });
-                      },
-                      style: AppStyles.textBlackReguler,
-                      textAlign: TextAlign.left,
-                      decoration: InputDecoration(
-                        hintText: 'Cari camera',
-                        hintStyle: AppStyles.textGrey2Color,
-                        contentPadding: const EdgeInsets.only(right: 8, left: 12),
-                        filled: true,
-                        fillColor: AppColors.whiteColor,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                    ),
-                  ) : SizedBox(),
+                  widget.filter == null
+                      ? Expanded(
+                          child: TextField(
+                            autofocus: true,
+                            onChanged: (value) {
+                              setState(() {
+                                _query = value;
+                              });
+                            },
+                            style: AppStyles.textBlackReguler,
+                            textAlign: TextAlign.left,
+                            decoration: InputDecoration(
+                              hintText: 'Cari camera',
+                              hintStyle: AppStyles.textGrey2Color,
+                              contentPadding:
+                                  const EdgeInsets.only(right: 8, left: 12),
+                              filled: true,
+                              fillColor: AppColors.whiteColor,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                          ),
+                        )
+                      : SizedBox(),
                 ],
               ),
             ),
@@ -72,8 +73,7 @@ class _searchState extends State<search> {
                     stream: Repository().getListCamera(),
                     builder: (context, snapshot) {
                       if (snapshot.data == null) {
-                        return const Center(
-                            child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
 
                       if (snapshot.hasData) {
@@ -82,16 +82,16 @@ class _searchState extends State<search> {
                         if (_query.isNotEmpty) {
                           listCamera = listCamera
                               .where((camera) => camera.title
-                              .toLowerCase()
-                              .contains(_query.toLowerCase()))
+                                  .toLowerCase()
+                                  .contains(_query.toLowerCase()))
                               .toList();
                         }
 
                         if (widget.filter != null) {
                           listCamera = listCamera
                               .where((camera) => camera.type
-                              .toLowerCase()
-                              .contains(widget.filter!))
+                                  .toLowerCase()
+                                  .contains(widget.filter!))
                               .toList();
                         }
 
