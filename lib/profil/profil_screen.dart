@@ -5,8 +5,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pa_rentalcam/profil/data_pribadi.dart';
 import 'package:pa_rentalcam/profil/pengaturan.dart';
-
+import 'package:pa_rentalcam/profil/tentang.dart';
 import '../screens/auth/login_screen.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -17,6 +18,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   User? currentUser;
   String? profileImageUrl;
+  String? previousProfileImageUrl;
 
   @override
   void initState() {
@@ -31,9 +33,12 @@ class _ProfilePageState extends State<ProfilePage> {
           .collection('users')
           .doc(currentUser!.uid)
           .get();
-      setState(() {
-        profileImageUrl = snapshot['profilePicture'];
-      });
+      if (snapshot.exists) {
+        setState(() {
+          profileImageUrl = snapshot['profilePicture'];
+          previousProfileImageUrl = snapshot['profilePicture'];
+        });
+      }
     }
   }
 
@@ -41,6 +46,9 @@ class _ProfilePageState extends State<ProfilePage> {
     final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
+      setState(() {
+        previousProfileImageUrl = profileImageUrl;
+      });
       await _uploadImageToFirebase(pickedImage.path);
     }
   }
@@ -88,9 +96,22 @@ class _ProfilePageState extends State<ProfilePage> {
                       _pickImageFromGallery();
                     },
                     child: ClipRRect(
-                      child: profileImageUrl != null
-                          ? Image.network(profileImageUrl!)
-                          : Image.asset("assets/images/add_profile.png"),
+                      child: Hero(
+                        tag: 'profileImage',
+                        child: profileImageUrl != null
+                            ? Image.network(
+                                profileImageUrl!,
+                                height: 120,
+                                width: 120,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset(
+                                "assets/images/add_profile.png",
+                                height: 120,
+                                width: 120,
+                                fit: BoxFit.cover,
+                              ),
+                      ),
                       borderRadius: BorderRadius.circular(60),
                     ),
                   ),
@@ -130,6 +151,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: Colors.black,
                   ),
                 ),
+                onTap: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context) => dataPribadi()));
+                },
               ),
               Divider(),
               ListTile(
@@ -166,8 +191,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: Colors.black,
                   ),
                 ),
-                onTap: () {
-                  // Navigasi ke halaman tentang
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context) => tentangPage()));
                 },
               ),
               Divider(),

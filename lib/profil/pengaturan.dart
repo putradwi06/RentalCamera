@@ -25,105 +25,107 @@ class _PengaturanState extends State<Pengaturan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => DashboardScreen()));
-                },
-                child: Row(
-                  children: [
-                    Image.asset("assets/images/back.png"),
-                    SizedBox(
-                      width: 70,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (BuildContext context) => DashboardScreen()));
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset("assets/images/back.png"),
+                      SizedBox(
+                        width: 70,
+                      ),
+                      Text(
+                        'Reset Password',
+                        style: AppStyles.textBlackColor.copyWith(
+                          fontSize: 22,
+                          fontWeight: AppStyles.semiBold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: Text(
+                    'Masukkan password lama dan password baru untuk mereset password :',
+                    style: AppStyles.textBlackColor.copyWith(
+                      fontSize: 16,
+                      fontWeight: AppStyles.semiBold,
+                      color: Colors.black,
                     ),
-                    Text(
-                      'Reset Password',
-                      style: AppStyles.textBlackColor.copyWith(
-                        fontSize: 22,
-                        fontWeight: AppStyles.semiBold,
-                        color: Colors.black,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: buildPasswordField(
+                    controller: _oldPasswordController,
+                    labelText: 'Password Lama',
+                    obscureText: _obscureOldPassword,
+                    onPressedIcon: () {
+                      setState(() {
+                        _obscureOldPassword = !_obscureOldPassword;
+                      });
+                    },
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: buildPasswordField(
+                    controller: _newPasswordController,
+                    labelText: 'Password Baru',
+                    obscureText: _obscureNewPassword,
+                    onPressedIcon: () {
+                      setState(() {
+                        _obscureNewPassword = !_obscureNewPassword;
+                      });
+                    },
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(10),
+                  child: buildPasswordField(
+                    controller: _confirmPasswordController,
+                    labelText: 'Ulangi Password Baru',
+                    obscureText: _obscureConfirmPassword,
+                    onPressedIcon: () {
+                      setState(() {
+                        _obscureConfirmPassword = !_obscureConfirmPassword;
+                      });
+                    },
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.symmetric(vertical: 16),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: AppColors.orangeColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
                       ),
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Text(
-                  'Masukkan password lama dan password baru untuk mereset password :',
-                  style: AppStyles.textBlackColor.copyWith(
-                    fontSize: 16,
-                    fontWeight: AppStyles.semiBold,
-                    color: Colors.black,
+                    onPressed: () {
+                      resetPassword();
+                    },
+                    child: Text('Reset Password'),
                   ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.all(10),
-                child: buildPasswordField(
-                  controller: _oldPasswordController,
-                  labelText: 'Password Lama',
-                  obscureText: _obscureOldPassword,
-                  onPressedIcon: () {
-                    setState(() {
-                      _obscureOldPassword = !_obscureOldPassword;
-                    });
-                  },
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(10),
-                child: buildPasswordField(
-                  controller: _newPasswordController,
-                  labelText: 'Password Baru',
-                  obscureText: _obscureNewPassword,
-                  onPressedIcon: () {
-                    setState(() {
-                      _obscureNewPassword = !_obscureNewPassword;
-                    });
-                  },
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(10),
-                child: buildPasswordField(
-                  controller: _confirmPasswordController,
-                  labelText: 'Ulangi Password Baru',
-                  obscureText: _obscureConfirmPassword,
-                  onPressedIcon: () {
-                    setState(() {
-                      _obscureConfirmPassword = !_obscureConfirmPassword;
-                    });
-                  },
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(vertical: 16),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: AppColors.orangeColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                  ),
-                  onPressed: () {
-                    resetPassword();
-                  },
-                  child: Text('Reset Password'),
-                ),
-              ),
-              Card()
-            ],
+                Card()
+              ],
+            ),
           ),
         ),
       ),

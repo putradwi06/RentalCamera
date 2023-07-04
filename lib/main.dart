@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:pa_rentalcam/profil/data_pribadi.dart';
+import 'package:pa_rentalcam/profil/profil_screen.dart';
 import 'package:pa_rentalcam/screens/auth/login_screen.dart';
+import 'package:pa_rentalcam/splashScreen/splash_screen.dart';
 
 import 'firebase_options.dart';
 
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: ProfilePage(),
     );
   }
 }

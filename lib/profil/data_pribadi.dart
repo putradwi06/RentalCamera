@@ -1,26 +1,40 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:pa_rentalcam/profil/profil_screen.dart';
+import 'package:image_picker/image_picker.dart';
 
-import '../app/styles/app_styles.dart';
-
-class GantiNama extends StatefulWidget {
+class dataPribadi extends StatefulWidget {
   @override
-  _ChangeNamePageState createState() => _ChangeNamePageState();
+  _dataPribadiState createState() => _dataPribadiState();
 }
 
-class _ChangeNamePageState extends State<GantiNama> {
-  String newName = '';
+class _dataPribadiState extends State<dataPribadi> {
+  String? profileImageUrl;
 
-  void changeName() {
-    // Lakukan sesuatu dengan nama baru, misalnya memperbarui data di server
+  Future<void> _pickImageFromGallery() async {
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        profileImageUrl = pickedImage.path;
+      });
+    }
+  }
 
-    // Contoh aksi lainnya:
-    // - Kirim permintaan HTTP ke server
-    // - Perbarui tampilan dengan nama baru
-    // - Simpan nama baru ke shared preferences atau database lokal
+  void _navigateToProfilePage() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProfilePage(),
+        fullscreenDialog: true,
+      ),
+    );
 
-    setState(() {
-      // Update state nama baru
-    });
+    if (result != null) {
+      setState(() {
+        profileImageUrl = result as String?;
+      });
+    }
   }
 
   @override
@@ -31,45 +45,65 @@ class _ChangeNamePageState extends State<GantiNama> {
           padding: EdgeInsets.all(16.0),
           child: Column(
             children: [
-              Text(
-                "Ganti Username",
-                style: AppStyles.textBlackColor.copyWith(
-                  fontSize: 24,
-                  fontWeight: AppStyles.reguler,
-                  color: Colors.black,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Row(
+                  children: [
+                    Image.asset("assets/images/back.png"),
+                    SizedBox(
+                      width: 70,
+                    ),
+                    Text(
+                      'Ganti Foto Profil',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
                 height: 40,
               ),
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    newName = value;
-                  });
+              GestureDetector(
+                onTap: () {
+                  _pickImageFromGallery();
                 },
-                decoration: InputDecoration(
-                  hintText: 'Masukkan nama baru',
-                  hintStyle: AppStyles.textBlackColor.copyWith(
-                    fontSize: 16,
-                    fontWeight: AppStyles.reguler,
-                    color: Colors.black,
-                  ),
+                child: ClipRRect(
+                  child: profileImageUrl != null
+                      ? Image.file(
+                          File(profileImageUrl!),
+                          height: 120,
+                          width: 120,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          "assets/images/default_profile.png",
+                          height: 120,
+                          width: 120,
+                          fit: BoxFit.cover,
+                        ),
+                  borderRadius: BorderRadius.circular(60),
                 ),
               ),
-              SizedBox(height: 16.0),
+              SizedBox(
+                height: 16.0,
+              ),
               ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Color(0xffFBA651)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ))),
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xffFBA651),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ),
+                ),
                 onPressed: () {
-                  changeName();
+                  _navigateToProfilePage();
                 },
-                child: Text('Ubah Nama Akun'),
+                child: Text('Ganti Foto Profil'),
               ),
             ],
           ),

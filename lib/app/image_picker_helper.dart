@@ -1,8 +1,7 @@
-
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
@@ -15,7 +14,7 @@ class ImagePickerHelper {
       File? compressedImage = await compressImage(image);
       return compressedImage;
     }
-   return null;
+    return null;
   }
 
   static Future<File?> imgFromGallery() async {
@@ -29,20 +28,20 @@ class ImagePickerHelper {
   }
 
   static Future<File?> compressImage(XFile? file) async {
-    final String newPath = p.join((await getTemporaryDirectory()).path,
-        '${FirebaseAuth.instance.currentUser!.uid}_${DateTime.now()}${p.extension(file?.path ?? "")}');
+    // final String newPath = p.join((await getTemporaryDirectory()).path,
+    //     '${FirebaseAuth.instance.currentUser!.uid}_${DateTime.now()}${p.extension(file?.path ?? "")}');
 
-    if (file != null) {
-      var result = await FlutterImageCompress.compressAndGetFile(
-        file.path,
-        newPath,
-        minHeight: 400,
-        minWidth: 300,
-        quality: 80,
-      );
+    // if (file != null) {
+    //   var result = await FlutterImageCompress.compressAndGetFile(
+    //     file.path,
+    //     newPath,
+    //     minHeight: 400,
+    //     minWidth: 300,
+    //     quality: 80,
+    //   );
 
-      return File(result!.path);
-    }
-    return null;
+    //   return File(result!.path);
+    // }
+    return File(file!.path);
   }
 }
