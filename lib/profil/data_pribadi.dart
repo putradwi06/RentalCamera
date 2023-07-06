@@ -1,40 +1,43 @@
 import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pa_rentalcam/profil/profil_screen.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pa_rentalcam/dashboard_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../app/image_helper.dart';
 
 class dataPribadi extends StatefulWidget {
+  final String? urlProfile;
+
+  dataPribadi(this.urlProfile);
+
   @override
   _dataPribadiState createState() => _dataPribadiState();
 }
 
 class _dataPribadiState extends State<dataPribadi> {
-  String? profileImageUrl;
+  File? profileImage;
+  String? urlProfile;
+  bool isLoading = false;
+
 
   Future<void> _pickImageFromGallery() async {
     final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
-        profileImageUrl = pickedImage.path;
+        profileImage = File(pickedImage.path);
       });
     }
   }
 
-  void _navigateToProfilePage() async {
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ProfilePage(),
-        fullscreenDialog: true,
-      ),
-    );
-
-    if (result != null) {
-      setState(() {
-        profileImageUrl = result as String?;
-      });
-    }
+  @override
+  void initState() {
+    if (widget.urlProfile != null) urlProfile = widget.urlProfile;
+    super.initState();
   }
 
   @override
@@ -45,26 +48,28 @@ class _dataPribadiState extends State<dataPribadi> {
           padding: EdgeInsets.all(16.0),
           child: Column(
             children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: Row(
-                  children: [
-                    Image.asset("assets/images/back.png"),
-                    SizedBox(
-                      width: 70,
+              Row(
+                children: [
+                  GestureDetector(
+                    child: Image.asset("assets/images/back.png"),
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              DashboardScreen()));
+                    },
+                  ),
+                  SizedBox(
+                    width: 70,
+                  ),
+                  Text(
+                    'Ganti Foto Profil',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
-                    Text(
-                      'Ganti Foto Profil',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 40,
@@ -73,21 +78,27 @@ class _dataPribadiState extends State<dataPribadi> {
                 onTap: () {
                   _pickImageFromGallery();
                 },
-                child: ClipRRect(
-                  child: profileImageUrl != null
-                      ? Image.file(
-                          File(profileImageUrl!),
+                child: profileImage == null
+                    ? ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: urlProfile != null && urlProfile != ""
+                      ? Image.network(
+                          urlProfile!,
                           height: 120,
                           width: 120,
                           fit: BoxFit.cover,
                         )
                       : Image.asset(
-                          "assets/images/default_profile.png",
+                          "assets/images/add_profile.png",
                           height: 120,
                           width: 120,
                           fit: BoxFit.cover,
                         ),
-                  borderRadius: BorderRadius.circular(60),
+                ) : ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Image.file(profileImage!, height: 120,
+                    width: 120,
+                    fit: BoxFit.cover,),
                 ),
               ),
               SizedBox(
@@ -100,10 +111,26 @@ class _dataPribadiState extends State<dataPribadi> {
                     borderRadius: BorderRadius.circular(18.0),
                   ),
                 ),
-                onPressed: () {
-                  _navigateToProfilePage();
+                onPressed: () async {
+                  // Send Image
+                  if (profileImage != null) {
+                    setState(() => isLoading = true);
+                    String _imgUrl =
+                        await FirebaseStorageHelper.uploadImageProfile(
+                            profileImage!);
+
+                    await FirebaseFirestore.instance
+                        .collection('Users')
+                        .doc(FirebaseAuth.instance.currentUser!.uid)
+                        .update({'profilePicture': _imgUrl});
+
+                    final prefs = await SharedPreferences.getInstance();
+                    await prefs.remove('profileUrl');
+                    await prefs.setString('profileUrl', _imgUrl);
+                    setState(() => isLoading = false);
+                  }
                 },
-                child: Text('Ganti Foto Profil'),
+                child: isLoading ? CircularProgressIndicator() : Text('Ganti Foto Profil'),
               ),
             ],
           ),

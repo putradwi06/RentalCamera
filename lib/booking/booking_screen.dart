@@ -763,7 +763,7 @@ class _DialogReviewState extends State<DialogReview> {
                 final File? image = await ImagePickerHelper.imgFromCamera();
                 if (image != null) {
                   setState(() {
-                    imgBuktiTransfer = image;
+                    imgBuktiTransfer = File(image.path);
                   });
                 }
               },
@@ -787,7 +787,6 @@ class _DialogReviewState extends State<DialogReview> {
               height: 50,
               child: MaterialButton(
                 onPressed: () async {
-                  debugPrint("ikang: ${widget.booking}");
                   if (imgBuktiTransfer != null) {
                     imgBuktiTransferUrl =
                         await FirebaseStorageHelper.uploadBuktiTransfer(

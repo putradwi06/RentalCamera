@@ -6,11 +6,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pa_rentalcam/profil/data_pribadi.dart';
+import 'package:pa_rentalcam/data/model/user_model.dart';
 import 'package:pa_rentalcam/profil/pengaturan.dart';
 import 'package:pa_rentalcam/profil/tentang.dart';
 import '../screens/auth/login_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../app/image_picker_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../app/image_picker_helper.dart';
 
 class ProfilePage extends StatefulWidget {
+  final String email;
+  final String phoneNumber;
+  final String name;
+  final String? profileUrl;
+
+  ProfilePage({required this.email, required this.name, required this.phoneNumber, required this.profileUrl});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -22,50 +35,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
+
+
     super.initState();
-    getCurrentUser();
-  }
-
-  Future<void> getCurrentUser() async {
-    currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser != null) {
-      DocumentSnapshot snapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(currentUser!.uid)
-          .get();
-      if (snapshot.exists) {
-        setState(() {
-          profileImageUrl = snapshot['profilePicture'];
-          previousProfileImageUrl = snapshot['profilePicture'];
-        });
-      }
-    }
-  }
-
-  Future<void> _pickImageFromGallery() async {
-    final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      setState(() {
-        previousProfileImageUrl = profileImageUrl;
-      });
-      await _uploadImageToFirebase(pickedImage.path);
-    }
-  }
-
-  Future<void> _uploadImageToFirebase(String imagePath) async {
-    final firebaseStorageRef = firebase_storage.FirebaseStorage.instance
-        .ref()
-        .child('profile_images/${currentUser!.uid}.jpg');
-    await firebaseStorageRef.putFile(File(imagePath));
-    final imageUrl = await firebaseStorageRef.getDownloadURL();
-    setState(() {
-      profileImageUrl = imageUrl;
-    });
-    await FirebaseFirestore.instance
-        .collection('Users')
-        .doc(currentUser!.uid)
-        .update({'profilePicture': imageUrl});
   }
 
   @override
@@ -91,35 +63,18 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(height: 58),
               Column(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      _pickImageFromGallery();
-                    },
-                    child: ClipRRect(
-                      child: Hero(
-                        tag: 'profileImage',
-                        child: profileImageUrl != null
-                            ? Image.network(
-                                profileImageUrl!,
-                                height: 120,
-                                width: 120,
-                                fit: BoxFit.cover,
-                              )
-                            : Image.asset(
-                                "assets/images/add_profile.png",
-                                height: 120,
-                                width: 120,
-                                fit: BoxFit.cover,
-                              ),
-                      ),
-                      borderRadius: BorderRadius.circular(60),
-                    ),
-                  ),
+                  widget.profileUrl != null ? ClipRRect(
+                    child: Image.network(widget.profileUrl!,  height: 150,
+                      width: 150,
+                    fit: BoxFit.cover),
+                    borderRadius: BorderRadius.circular(100),
+                  ) : Image.asset("assets/images/add_profile.png",  height: 150,
+                    width: 150,),
                 ],
               ),
               SizedBox(height: 20),
               Text(
-                'Putra DwiS',
+                "${widget.name}",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -129,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               SizedBox(height: 4),
               Text(
-                'putradwi@gmail.com',
+                "${widget.email}",
                 style: TextStyle(
                   fontSize: 16,
                   color: Color(0xffADA8A4),
@@ -152,8 +107,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => dataPribadi()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => dataPribadi(widget.profileUrl)));
                 },
               ),
               Divider(),
@@ -214,6 +169,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 onTap: () async {
                   await FirebaseAuth.instance.signOut();
+                  Future.microtask(() => SharedPreferences.getInstance()).then((prefs) {
+                     prefs.remove('email');
+                     prefs.remove('password');
+                     prefs.remove('name');
+                      prefs.remove('profileUrl');
+                  });
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (BuildContext context) => LoginPage()));
                 },

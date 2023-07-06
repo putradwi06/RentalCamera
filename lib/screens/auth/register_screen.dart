@@ -2,10 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pa_rentalcam/app/styles/app_colors.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
+import 'package:pa_rentalcam/dashboard_screen.dart';
 import 'package:pa_rentalcam/data/model/user_model.dart';
 import 'package:pa_rentalcam/data/repository/repository.dart';
 import 'package:pa_rentalcam/screens/auth/add_profil_screen.dart';
 import 'package:pa_rentalcam/screens/auth/login_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -313,18 +315,32 @@ class RegisterPage extends StatelessWidget {
 
                                     final userId = FirebaseAuth.instance.currentUser!.uid;
 
-                                    await Repository().createUser(UserModel(
+                                    await Repository().createUser(
+                                      UserModel(
                                         id: userId,
                                         fullName: _fullNameController.text,
                                         phoneNumber:
                                         _phoneNumberController.text,
-                                        email: _emailController.text));
+                                        email: _emailController.text,
+                                    ),
+                                    );
 
                                     await FirebaseAuth.instance
                                         .signInWithEmailAndPassword(
                                         email: _emailController.text,
                                         password:
                                         _password1Controller.text);
+
+                                    final prefs = await SharedPreferences.getInstance();
+                                    await prefs.setString('email', _emailController.text);
+                                    await prefs.setString('name', _fullNameController.text);
+                                    await prefs.setString('profileUrl', "");
+                                    await prefs.setString('phoneNumber', _phoneNumberController.text);
+
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DashboardScreen()));
                                   } else {
                                     final snackBar = SnackBar(
                                       content: const Text(
@@ -338,11 +354,6 @@ class RegisterPage extends StatelessWidget {
                                     ScaffoldMessenger.of(context)
                                         .showSnackBar(snackBar);
                                   }
-
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => addProfil()));
                                 },
                                 child: Container(
                                   padding: EdgeInsets.all(10),

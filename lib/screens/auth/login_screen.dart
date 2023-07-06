@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -5,6 +6,8 @@ import 'package:pa_rentalcam/app/styles/app_colors.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
 import 'package:pa_rentalcam/dashboard_screen.dart';
 import 'package:pa_rentalcam/screens/auth/register_screen.dart';
+
+import '../../data/model/user_model.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,76 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _rememberMe = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _checkRememberMeStatus();
-  }
-
-  Future<void> _checkRememberMeStatus() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool rememberMe = prefs.getBool('rememberMe') ?? false;
-    if (rememberMe) {
-      String? email = prefs.getString('email');
-      String? password = prefs.getString('password');
-
-      _emailController.text = email!;
-      _passwordController.text = password!;
-      _rememberMe = true;
-
-      _login(email, password);
-    }
-  }
-
-  Future<void> _saveLoginStatus(String email, String password) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('rememberMe', _rememberMe);
-    if (_rememberMe) {
-      await prefs.setString('email', email);
-      await prefs.setString('password', password);
-    } else {
-      await prefs.remove('email');
-      await prefs.remove('password');
-    }
-  }
-
-  Future<void> _login(String email, String password) async {
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-
-      String namaPengguna = ''; // Nama pengguna dari login
-
-      _saveLoginStatus(email, password); // Simpan status login
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DashboardScreen(),
-        ),
-      );
-    } on FirebaseAuthException catch (e) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Login Gagal'),
-            content: Text('Email atau password salah.'),
-            actions: <Widget>[
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
+  final _keyForm = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -141,194 +75,246 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.white),
                 padding: EdgeInsets.all(10),
                 margin: EdgeInsets.all(24),
-                child: Column(children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 32),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Email",
-                          style: AppStyles.textBlackColor.copyWith(
-                            fontSize: 14,
-                            fontWeight: AppStyles.semiBold,
-                            color: Color(0xff191410),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 6,
-                        ),
-                        TextField(
-                          controller: _emailController,
-                          style:
-                              AppStyles.textBlackColor.copyWith(fontSize: 14),
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                            hintText: "Masukkan email kamu",
-                            contentPadding: EdgeInsets.all(10),
-                            hintStyle:
-                                AppStyles.textGrey2Color.copyWith(fontSize: 14),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18),
-                              borderSide: BorderSide(
-                                color: AppColors.orangeColor,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 32),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Password",
-                          style: AppStyles.textBlackColor.copyWith(
-                            fontSize: 14,
-                            fontWeight: AppStyles.semiBold,
-                            color: Color(0xff191410),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 6,
-                        ),
-                        TextField(
-                          controller: _passwordController,
-                          obscureText: true,
-                          style:
-                              AppStyles.textBlackColor.copyWith(fontSize: 14),
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                            hintText: "Masukkan password kamu",
-                            contentPadding: EdgeInsets.all(10),
-                            hintStyle:
-                                AppStyles.textGrey2Color.copyWith(fontSize: 14),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(18),
-                              borderSide: BorderSide(
-                                color: AppColors.orangeColor,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 60,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
+                child: Form(
+                  key: _keyForm,
+                  child: Column(children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 32),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Container(
-                            width: double.infinity,
-                            height: 50,
-                            margin: EdgeInsets.symmetric(horizontal: 55),
-                            child: MaterialButton(
-                              onPressed: () {
-                                String email = _emailController.text;
-                                String password = _passwordController.text;
-                                _login(email, password);
-                              },
-                              child: Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: Color(0xff191410),
-                                  borderRadius: BorderRadius.circular(12),
+                          Text(
+                            "Email",
+                            style: AppStyles.textBlackColor.copyWith(
+                              fontSize: 14,
+                              fontWeight: AppStyles.semiBold,
+                              color: Color(0xff191410),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          TextFormField(
+                            controller: _emailController,
+                            style:
+                                AppStyles.textBlackColor.copyWith(fontSize: 14),
+                            validator: (string) {
+                              if (string != null) {
+                                return null;
+                              } else {
+                                return "masukkan email anda!";
+                              }
+                            },
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              hintText: "Masukkan email kamu",
+                              contentPadding: EdgeInsets.all(10),
+                              hintStyle:
+                                  AppStyles.textGrey2Color.copyWith(fontSize: 14),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(18),
+                                borderSide: BorderSide(
+                                  color: AppColors.orangeColor,
                                 ),
-                                child: Center(
-                                  child: Text(
-                                    "Masuk",
-                                    style: AppStyles.textBlackColor.copyWith(
-                                      fontSize: 16,
-                                      fontWeight: AppStyles.medium,
-                                      color: Color(0xffffffff),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 32),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Password",
+                            style: AppStyles.textBlackColor.copyWith(
+                              fontSize: 14,
+                              fontWeight: AppStyles.semiBold,
+                              color: Color(0xff191410),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          TextFormField(
+                            controller: _passwordController,
+                            obscureText: true,
+                            validator: (string) {
+                              if (string != null) {
+                                return null;
+                              } else {
+                                return "masukkan password anda!";
+                              }
+                            },
+                            style:
+                                AppStyles.textBlackColor.copyWith(fontSize: 14),
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              hintText: "Masukkan password kamu",
+                              contentPadding: EdgeInsets.all(10),
+                              hintStyle:
+                                  AppStyles.textGrey2Color.copyWith(fontSize: 14),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(18),
+                                borderSide: BorderSide(
+                                  color: AppColors.orangeColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 60,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: 50,
+                              margin: EdgeInsets.symmetric(horizontal: 55),
+                              child: MaterialButton(
+                                onPressed: () async {
+                                  if (_keyForm.currentState!.validate()) {
+                                    String email = _emailController.text;
+                                    String password = _passwordController.text;
+
+
+                                    try {
+                                      UserCredential userCredential = await FirebaseAuth
+                                          .instance
+                                          .signInWithEmailAndPassword(
+                                          email: email, password: password);
+
+                                      if (userCredential.user?.uid != null){
+                                        final userRef = await FirebaseFirestore.instance
+                                            .collection('Users')
+                                            .doc(userCredential.user!.uid).get();
+
+                                        debugPrint("userRef: ${userRef}");
+                                        final userModel = UserModel.fromMap(userRef.data()!);
+
+                                        final prefs = await SharedPreferences.getInstance();
+                                        await prefs.setString('email', userModel.email);
+                                        await prefs.setString('name', userModel.fullName);
+                                        await prefs.setString('profileUrl', userModel.profilePicture ?? "");
+                                        await prefs.setString('phoneNumber', userModel.phoneNumber);
+
+                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+
+                                      }
+                                    } catch (e) {
+                                      debugPrint("e: $e");
+                                      if (e.toString() == "[firebase_auth/unknown] Given String is empty or null") {
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("User tidak ditemukan")));
+                                      }
+                                    }
+
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Masukkan email atau password anda!")));
+                                  }
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xff191410),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Masuk",
+                                      style: AppStyles.textBlackColor.copyWith(
+                                        fontSize: 16,
+                                        fontWeight: AppStyles.medium,
+                                        color: Color(0xffffffff),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "atau",
+                          style: AppStyles.textBlackColor.copyWith(
+                            fontSize: 16,
+                            fontWeight: AppStyles.semiBold,
+                            color: Color(0xffADA8A4),
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "atau",
-                        style: AppStyles.textBlackColor.copyWith(
-                          fontSize: 16,
-                          fontWeight: AppStyles.semiBold,
-                          color: Color(0xffADA8A4),
                         ),
-                      ),
-                      SizedBox(
-                        height: 14,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 45,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Belum punya akun?",
-                        style: AppStyles.textBlackColor.copyWith(
-                          fontSize: 16,
-                          fontWeight: AppStyles.semiBold,
-                          color: Color(0xff7B756F),
+                        SizedBox(
+                          height: 14,
                         ),
-                      ),
-                      SizedBox(
-                        width: 6,
-                      ),
-                      Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      RegisterPage(),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 45,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Belum punya akun?",
+                          style: AppStyles.textBlackColor.copyWith(
+                            fontSize: 16,
+                            fontWeight: AppStyles.semiBold,
+                            color: Color(0xff7B756F),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        RegisterPage(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                "Registrasi",
+                                style: AppStyles.textBlackColor.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: AppStyles.semiBold,
+                                  color: Color(0xffFBA651),
                                 ),
-                              );
-                            },
-                            child: Text(
-                              "Registrasi",
-                              style: AppStyles.textBlackColor.copyWith(
-                                fontSize: 16,
-                                fontWeight: AppStyles.semiBold,
-                                color: Color(0xffFBA651),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ]),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ]),
+                ),
               )
             ],
           ),

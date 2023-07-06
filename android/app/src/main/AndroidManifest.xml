@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pa_rentalcam">
    <application
-        android:label="pa_rentalcam"
+        android:label="MBG Camera"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

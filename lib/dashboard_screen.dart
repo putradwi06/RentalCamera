@@ -3,31 +3,51 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:pa_rentalcam/app/styles/app_colors.dart';
 import 'package:pa_rentalcam/app/styles/app_styles.dart';
 import 'package:pa_rentalcam/screens/home/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../booking/riwayat_booking.dart';
 import '../profil/profil_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
+
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  List<Widget> tabs = [
-    HomePage(
-      namaPengguna: '',
-    ),
-    riwayatBooking(),
-    ProfilePage(),
-  ];
+  late List<Widget> tabs;
+
+  String? email;
+  String? password;
+  String? name;
+  String? profileUrl;
+
+  @override
+  void initState() {
+    tabs = [
+      HomePage(namaPengguna: ''),
+      riwayatBooking(),
+    ];
+
+    Future.microtask(() => SharedPreferences.getInstance()).then((prefs) {
+      email = prefs.getString('email');
+      password = prefs.getString('phoneNumber');
+      name = prefs.getString('name');
+      profileUrl = prefs.getString('profileUrl');
+
+      tabs.add(
+        ProfilePage(
+            email: prefs.getString('name')!,
+            name: prefs.getString('name')!,
+            phoneNumber: prefs.getString('phoneNumber')!,
+            profileUrl: prefs.getString('profileUrl')),
+      );
+    });
+
+    super.initState();
+  }
 
   int currentPage = 0;
-
-  setPage(index) {
-    setState(() {
-      currentPage = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

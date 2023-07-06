@@ -5,13 +5,36 @@ import 'package:pa_rentalcam/data/model/camera_model.dart';
 import 'package:pa_rentalcam/data/repository/repository.dart';
 import 'package:pa_rentalcam/detail_camera/detail_camera_screen.dart';
 import 'package:pa_rentalcam/screens/home/search.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'filter_screen.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final String namaPengguna;
 
   const HomePage({Key? key, required this.namaPengguna}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String? email;
+  String? password;
+  String? name;
+  String? profileUrl;
+
+  @override
+  void initState() {
+    Future.microtask(() => SharedPreferences.getInstance()).then((prefs) {
+      email = prefs.getString('email');
+      password = prefs.getString('password');
+      name = prefs.getString('name');
+      profileUrl = prefs.getString('profileUrl');
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +70,7 @@ class HomePage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '$namaPengguna',
+                                '${name}',
                                 style: AppStyles.textBlackColor.copyWith(
                                   fontSize: 22,
                                   fontWeight: AppStyles.semiBold,
