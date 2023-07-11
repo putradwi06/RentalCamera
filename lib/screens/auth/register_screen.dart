@@ -307,40 +307,58 @@ class RegisterPage extends StatelessWidget {
                                   if (_password1Controller.text ==
                                       _password2Controller.text) {
 
-                                    await FirebaseAuth.instance
-                                        .createUserWithEmailAndPassword(
-                                            email: _emailController.text,
-                                            password:
-                                                _password1Controller.text);
+                                   try {
+                                     await FirebaseAuth.instance
+                                         .createUserWithEmailAndPassword(
+                                         email: _emailController.text,
+                                         password:
+                                         _password1Controller.text);
 
-                                    final userId = FirebaseAuth.instance.currentUser!.uid;
+                                     final userId = FirebaseAuth.instance.currentUser!.uid;
 
-                                    await Repository().createUser(
-                                      UserModel(
-                                        id: userId,
-                                        fullName: _fullNameController.text,
-                                        phoneNumber:
-                                        _phoneNumberController.text,
-                                        email: _emailController.text,
-                                    ),
-                                    );
+                                     await Repository().createUser(
+                                       UserModel(
+                                         id: userId,
+                                         fullName: _fullNameController.text,
+                                         phoneNumber:
+                                         _phoneNumberController.text,
+                                         email: _emailController.text,
+                                       ),
+                                     );
 
-                                    await FirebaseAuth.instance
-                                        .signInWithEmailAndPassword(
-                                        email: _emailController.text,
-                                        password:
-                                        _password1Controller.text);
+                                     await FirebaseAuth.instance
+                                         .signInWithEmailAndPassword(
+                                         email: _emailController.text,
+                                         password:
+                                         _password1Controller.text);
 
-                                    final prefs = await SharedPreferences.getInstance();
-                                    await prefs.setString('email', _emailController.text);
-                                    await prefs.setString('name', _fullNameController.text);
-                                    await prefs.setString('profileUrl', "");
-                                    await prefs.setString('phoneNumber', _phoneNumberController.text);
+                                     final prefs = await SharedPreferences.getInstance();
+                                     await prefs.setString('email', _emailController.text);
+                                     await prefs.setString('name', _fullNameController.text);
+                                     await prefs.setString('profileUrl', "");
+                                     await prefs.setString('phoneNumber', _phoneNumberController.text);
 
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => DashboardScreen()));
+                                     Navigator.pushReplacement(
+                                         context,
+                                         MaterialPageRoute(
+                                             builder: (context) => DashboardScreen()));
+                                   } catch (e) {
+                                     if (e.toString() ==
+                                         '[firebase_auth/invalid-email] The email address is badly formatted.') {
+                                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Masukkan format email dengan benar")));
+
+                                     } else if (e.toString() ==
+                                         '[firebase_auth/weak-password] Password should be at least 6 characters') {
+                                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Password kurang dari 6 karakter")));
+
+                                     } else if (e.toString() ==
+                                         '[firebase_auth/network-request-failed] A network error (such as timeout, interrupted connection or unreachable host) has occurred.') {
+                                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("No internet connection")));
+
+                                     }
+
+                                   }
+
                                   } else {
                                     final snackBar = SnackBar(
                                       content: const Text(

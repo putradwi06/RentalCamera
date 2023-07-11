@@ -222,8 +222,23 @@ class _LoginPageState extends State<LoginPage> {
                                     } catch (e) {
                                       debugPrint("e: $e");
                                       if (e.toString() == "[firebase_auth/unknown] Given String is empty or null") {
-                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("User tidak ditemukan")));
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Masukkan email dan password Anda")));
                                       }
+
+                                      if (e.toString() ==
+                                          '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.') {
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Email tidak ditemukan")));
+                                      }
+
+                                      if (e.toString() ==
+                                          '[firebase_auth/network-request-failed] A network error (such as timeout, interrupted connection or unreachable host) has occurred.') {
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("No internet connection")));
+                                      }
+
+                                      if (e.toString() == '[firebase_auth/wrong-password] The password is invalid or the user does not have a password.') {
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Password Anda salah")));
+                                      }
+
                                     }
 
                                   } else {
