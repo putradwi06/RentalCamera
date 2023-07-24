@@ -120,11 +120,16 @@ class _MyHomePageState extends State<MyHomePage>
 
                 if (snapshot.hasData) {
                   final List<Booking> listBooking = snapshot.data ?? [];
+                  int denda = 0;
                   final listDenda = listBooking.where((element) {
-                    if (element.status == "OnRental")
-                      return DateTime.now().compareTo(element.endRentalTime!.toDate()) == 1;
+                    if (element.status == "OnRental") {
+                      if (DateTime.now().compareTo(element.endRentalTime!.toDate()) == 1) {
+                        denda = lewat berapa hari; // cari lewat chat gpt cara menghitung jumlah hari sekarang dengan tanggal yang sudah ditentukan;
+                      }
+                    }
                     return false;
                   }).toList();
+
                   final listDalamPenyewaan = listBooking.where((element) => element.status == "OnRental" || element.status == "Pending").toList();
                   final listSelesai = listBooking.where((element) => element.status == "Completed").toList();
 
@@ -216,7 +221,7 @@ class _MyHomePageState extends State<MyHomePage>
                                                   ),
                                                   Spacer(),
                                                   Text(
-                                                    konversiKeRupiah(listDenda[index].totalPrice),
+                                                    denda != 0 ? konversiKeRupiah(denda) : konversiKeRupiah(listDenda[index].totalPrice),
                                                     style: AppStyles.textBlackColor
                                                         .copyWith(
                                                       fontSize: 16,
