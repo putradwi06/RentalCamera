@@ -8,7 +8,7 @@ class Booking extends Equatable {
   final int rentalDay;
   final Timestamp? startRentalTime;
   final Timestamp? endRentalTime;
-  final int totalPrice;
+  int totalPrice;
   final String userBookingId;
   final String userBookingName;
   final int userBookingNoTlpn;

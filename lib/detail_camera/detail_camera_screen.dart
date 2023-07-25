@@ -174,7 +174,7 @@ final CameraModel camera;
                             Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        BookingPage(cameraModel: camera.copyWith(quantity: 1),),),);
+                                        BookingPage(cameraModel: camera.copyWith(quantity: 1), ),),);
                           },
                           child: Container(
                             padding: EdgeInsets.all(10),

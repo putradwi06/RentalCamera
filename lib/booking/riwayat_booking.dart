@@ -124,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage>
                   final listDenda = listBooking.where((element) {
                     if (element.status == "OnRental") {
                       if (DateTime.now().compareTo(element.endRentalTime!.toDate()) == 1) {
-                        denda = lewat berapa hari; // cari lewat chat gpt cara menghitung jumlah hari sekarang dengan tanggal yang sudah ditentukan;
+
                       }
                     }
                     return false;
