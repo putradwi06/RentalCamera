@@ -112,8 +112,8 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               hintText: "Masukkan email kamu",
                               contentPadding: EdgeInsets.all(10),
-                              hintStyle:
-                                  AppStyles.textGrey2Color.copyWith(fontSize: 14),
+                              hintStyle: AppStyles.textGrey2Color
+                                  .copyWith(fontSize: 14),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(18),
                                 borderSide: BorderSide(
@@ -163,8 +163,8 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               hintText: "Masukkan password kamu",
                               contentPadding: EdgeInsets.all(10),
-                              hintStyle:
-                                  AppStyles.textGrey2Color.copyWith(fontSize: 14),
+                              hintStyle: AppStyles.textGrey2Color
+                                  .copyWith(fontSize: 14),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(18),
                                 borderSide: BorderSide(
@@ -195,39 +195,80 @@ class _LoginPageState extends State<LoginPage> {
                                     String email = _emailController.text;
                                     String password = _passwordController.text;
 
-
                                     try {
-                                      UserCredential userCredential = await FirebaseAuth
-                                          .instance
-                                          .signInWithEmailAndPassword(
-                                          email: email, password: password);
+                                      UserCredential userCredential =
+                                          await FirebaseAuth.instance
+                                              .signInWithEmailAndPassword(
+                                                  email: email,
+                                                  password: password);
 
-                                      if (userCredential.user?.uid != null){
-                                        final userRef = await FirebaseFirestore.instance
+                                      if (userCredential.user?.uid != null) {
+                                        final userRef = await FirebaseFirestore
+                                            .instance
                                             .collection('Users')
-                                            .doc(userCredential.user!.uid).get();
+                                            .doc(userCredential.user!.uid)
+                                            .get();
 
                                         debugPrint("userRef: ${userRef}");
-                                        final userModel = UserModel.fromMap(userRef.data()!);
+                                        final userModel =
+                                            UserModel.fromMap(userRef.data()!);
 
-                                        final prefs = await SharedPreferences.getInstance();
-                                        await prefs.setString('email', userModel.email);
-                                        await prefs.setString('name', userModel.fullName);
-                                        await prefs.setString('profileUrl', userModel.profilePicture ?? "");
-                                        await prefs.setString('phoneNumber', userModel.phoneNumber);
+                                        final prefs = await SharedPreferences
+                                            .getInstance();
+                                        await prefs.setString(
+                                            'email', userModel.email);
+                                        await prefs.setString(
+                                            'name', userModel.fullName);
+                                        await prefs.setString('profileUrl',
+                                            userModel.profilePicture ?? "");
+                                        await prefs.setString('phoneNumber',
+                                            userModel.phoneNumber);
 
-                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => DashboardScreen()));
-
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    DashboardScreen()));
                                       }
                                     } catch (e) {
                                       debugPrint("e: $e");
-                                      if (e.toString() == "[firebase_auth/unknown] Given String is empty or null") {
-                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("User tidak ditemukan")));
+                                      if (e.toString() ==
+                                          "[firebase_auth/unknown] Given String is empty or null") {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    "Masukkan email dan password Anda")));
+                                      }
+
+                                      if (e.toString() ==
+                                          '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.') {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    "Email tidak ditemukan")));
+                                      }
+
+                                      if (e.toString() ==
+                                          '[firebase_auth/network-request-failed] A network error (such as timeout, interrupted connection or unreachable host) has occurred.') {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    "No internet connection")));
+                                      }
+
+                                      if (e.toString() ==
+                                          '[firebase_auth/wrong-password] The password is invalid or the user does not have a password.') {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    "Password Anda salah")));
                                       }
                                     }
-
                                   } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Masukkan email atau password anda!")));
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            content: Text(
+                                                "Masukkan email atau password anda!")));
                                   }
                                 },
                                 child: Container(

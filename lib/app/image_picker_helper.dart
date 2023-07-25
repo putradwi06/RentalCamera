@@ -14,9 +14,9 @@ class ImagePickerHelper {
     if (image != null) {
       final listImageByte = await image.readAsBytes();
       File? compressedImage = await compressImage(listImageByte);
-      return compressedImage;
+      return File(image.path);
     }
-   return null;
+    return null;
   }
 
   static Future<File?> imgFromGallery() async {
@@ -32,7 +32,8 @@ class ImagePickerHelper {
 
   static Future<File> compressImage(List<int> bytes) async {
     int imageLength = bytes.length;
-    if (imageLength < 1000000) return File.fromRawPath(Uint8List.fromList(bytes));
+    if (imageLength < 2000000)
+      return File.fromRawPath(Uint8List.fromList(bytes));
     final img.Image image = img.decodeImage(Uint8List.fromList(bytes))!;
     int compressQuality = 100;
     int length = imageLength;
@@ -44,7 +45,7 @@ class ImagePickerHelper {
         quality: compressQuality,
       );
       length = newByte.length;
-    } while (length > 1000000);
+    } while (length > 2000000);
 
     return File.fromRawPath(Uint8List.fromList(newByte));
   }

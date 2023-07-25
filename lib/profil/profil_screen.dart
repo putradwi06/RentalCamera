@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pa_rentalcam/profil/data_pribadi.dart';
 import 'package:pa_rentalcam/data/model/user_model.dart';
 import 'package:pa_rentalcam/profil/pengaturan.dart';
+import 'package:pa_rentalcam/profil/syarat.dart';
 import 'package:pa_rentalcam/profil/tentang.dart';
 import '../screens/auth/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,7 +23,11 @@ class ProfilePage extends StatefulWidget {
   final String name;
   final String? profileUrl;
 
-  ProfilePage({required this.email, required this.name, required this.phoneNumber, required this.profileUrl});
+  ProfilePage(
+      {required this.email,
+      required this.name,
+      required this.phoneNumber,
+      required this.profileUrl});
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -35,8 +40,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-
-
     super.initState();
   }
 
@@ -63,13 +66,17 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(height: 58),
               Column(
                 children: [
-                  widget.profileUrl != null ? ClipRRect(
-                    child: Image.network(widget.profileUrl!,  height: 150,
-                      width: 150,
-                    fit: BoxFit.cover),
-                    borderRadius: BorderRadius.circular(100),
-                  ) : Image.asset("assets/images/add_profile.png",  height: 150,
-                    width: 150,),
+                  widget.profileUrl != null
+                      ? ClipRRect(
+                          child: Image.network(widget.profileUrl!,
+                              height: 150, width: 150, fit: BoxFit.cover),
+                          borderRadius: BorderRadius.circular(100),
+                        )
+                      : Image.asset(
+                          "assets/images/add_profile.png",
+                          height: 150,
+                          width: 150,
+                        ),
                 ],
               ),
               SizedBox(height: 20),
@@ -108,7 +115,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => dataPribadi(widget.profileUrl)));
+                      builder: (BuildContext context) =>
+                          dataPribadi(widget.profileUrl)));
                 },
               ),
               Divider(),
@@ -155,6 +163,27 @@ class _ProfilePageState extends State<ProfilePage> {
               Divider(),
               ListTile(
                 leading: Image.asset(
+                  "assets/images/syarat_icon.png",
+                  width: 32,
+                  height: 32,
+                ),
+                title: Text(
+                  'Syarat Rental',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context) => syaratPage()));
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Image.asset(
                   "assets/images/ic_keluar.png",
                   width: 32,
                   height: 32,
@@ -169,11 +198,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 onTap: () async {
                   await FirebaseAuth.instance.signOut();
-                  Future.microtask(() => SharedPreferences.getInstance()).then((prefs) {
-                     prefs.remove('email');
-                     prefs.remove('password');
-                     prefs.remove('name');
-                      prefs.remove('profileUrl');
+                  Future.microtask(() => SharedPreferences.getInstance())
+                      .then((prefs) {
+                    prefs.remove('email');
+                    prefs.remove('password');
+                    prefs.remove('name');
+                    prefs.remove('profileUrl');
                   });
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (BuildContext context) => LoginPage()));

@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,6 +26,8 @@ class BookingPage extends StatefulWidget {
 class _BookingPageState extends State<BookingPage> {
   int _selectedButtonIndex = 1;
   int totalPrice = 0;
+  NumberFormat rupiahFormat =
+      NumberFormat.currency(locale: 'id_ID', symbol: 'Rp');
 
   @override
   void initState() {
@@ -165,8 +167,9 @@ class _BookingPageState extends State<BookingPage> {
                                                           (widget.cameraModel
                                                                   .quantity! +
                                                               1));
-                                                  totalPrice = widget.cameraModel
-                                                      .price * _selectedButtonIndex;
+                                                  totalPrice =
+                                                      widget.cameraModel.price *
+                                                          _selectedButtonIndex;
                                                 }
                                               });
 
@@ -214,8 +217,9 @@ class _BookingPageState extends State<BookingPage> {
                                                           (widget.cameraModel
                                                                   .quantity! -
                                                               1));
-                                                  totalPrice = widget.cameraModel
-                                                      .price * _selectedButtonIndex;
+                                                  totalPrice =
+                                                      widget.cameraModel.price *
+                                                          _selectedButtonIndex;
                                                 }
                                               });
 
@@ -230,7 +234,7 @@ class _BookingPageState extends State<BookingPage> {
                                           ),
                                           Spacer(),
                                           Text(
-                                            "Rp${widget.cameraModel.price}",
+                                            rupiahFormat.format(totalPrice),
                                             style: AppStyles.textBlackColor
                                                 .copyWith(
                                               fontSize: 16,
@@ -282,7 +286,8 @@ class _BookingPageState extends State<BookingPage> {
                                     setState(
                                       () {
                                         _selectedButtonIndex = i;
-                                        totalPrice = widget.cameraModel.price * _selectedButtonIndex;
+                                        totalPrice = widget.cameraModel.price *
+                                            _selectedButtonIndex;
                                       },
                                     );
                                   },
@@ -370,7 +375,7 @@ class _BookingPageState extends State<BookingPage> {
                                           ),
                                           Spacer(),
                                           Text(
-                                            "Rp${widget.cameraModel.price.toString()}",
+                                            rupiahFormat.format(totalPrice),
                                             style: AppStyles.textBlackColor
                                                 .copyWith(
                                               fontSize: 16,
@@ -700,7 +705,7 @@ class _BookingPageState extends State<BookingPage> {
           ),
           Spacer(),
           Text(
-            "Rp$totalPrice",
+            rupiahFormat.format(totalPrice),
             style: AppStyles.textBlackColor.copyWith(
               fontSize: 16,
               fontWeight: AppStyles.medium,
@@ -795,8 +800,8 @@ class _DialogReviewState extends State<DialogReview> {
                     await Repository().sendBooking(widget.booking
                         .copyWith(buktiTransfer: imgBuktiTransferUrl));
 
-                    Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (_) => DashboardScreen()));
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (_) => DashboardScreen()));
                   }
                 },
                 child: Container(
