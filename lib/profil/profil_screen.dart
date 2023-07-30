@@ -91,6 +91,31 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 textAlign: TextAlign.center,
               ),
+              GestureDetector(onTap: () async {
+                await FirebaseAuth.instance.verifyPhoneNumber(
+                  phoneNumber: '+6281332327241',
+                  verificationCompleted: (PhoneAuthCredential credential) {
+                    debugPrint("verificationCompleted: $credential");
+                  },
+                  verificationFailed: (FirebaseAuthException e) {
+                    debugPrint("verificationFailedt: $e");
+                  },
+                  codeSent: (String verificationId, int? resendToken) async {
+                    debugPrint("code sent: $verificationId | $resendToken");
+
+                    String smsCode = '';
+
+                    PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
+
+
+                    await FirebaseAuth.instance.signInWithCredential(credential);
+                  },
+                  codeAutoRetrievalTimeout: (String verificationId) {
+                    debugPrint("codeAutoRetrievalTimeout: $verificationId");
+                  },
+                );
+
+              },child: Text("Verifikasi Nomor Telephone")),
               SizedBox(height: 24.0),
               ListTile(
                 leading: Image.asset(
