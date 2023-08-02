@@ -48,7 +48,8 @@ class _HomePageState extends State<HomePage> {
             }
 
             if (snapshot.hasData) {
-              final List<CameraModel> listCamera = snapshot.data ?? [];
+              final List<CameraModel> data = snapshot.data ?? [];
+              final List<CameraModel> listCamera = data.where((element) => element.stock != 0).toList();
               return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

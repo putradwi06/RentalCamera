@@ -203,7 +203,7 @@ class _BookingPageState extends State<BookingPage> {
                                               setState(() {
                                                 if (widget
                                                         .cameraModel.quantity !=
-                                                    null) {
+                                                    null && widget.cameraModel.quantity != widget.cameraModel.stock) {
                                                   widget.cameraModel.quantity =
                                                       widget.cameraModel
                                                               .quantity! +
@@ -627,8 +627,6 @@ class _BookingPageState extends State<BookingPage> {
                                 margin: EdgeInsets.symmetric(horizontal: 55),
                                 child: MaterialButton(
                                   onPressed: () {
-                                    int totalPrice = widget.cameraModel.price;
-
                                     final bookingModel = Booking(
                                       bookingId: "",
                                       cameraBooking: widget.cameraModel,
@@ -647,8 +645,10 @@ class _BookingPageState extends State<BookingPage> {
 
                                     showDialog(
                                         context: context,
-                                        builder: (_) => DialogReview(
-                                            booking: bookingModel));
+                                        builder: (_) {
+                                          return DialogReview(
+                                              booking:  bookingModel);
+                                        });
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(10),
@@ -796,6 +796,8 @@ class _DialogReviewState extends State<DialogReview> {
                     imgBuktiTransferUrl =
                         await FirebaseStorageHelper.uploadBuktiTransfer(
                             imgBuktiTransfer!);
+
+
 
                     await Repository().sendBooking(widget.booking
                         .copyWith(buktiTransfer: imgBuktiTransferUrl));

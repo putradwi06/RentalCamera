@@ -34,6 +34,9 @@ class ImagePickerHelper {
     int imageLength = bytes.length;
     if (imageLength < 2000000)
       return File.fromRawPath(Uint8List.fromList(bytes));
+    if (imageLength < 2000000)
+      return File.fromRawPath(Uint8List.fromList(bytes));
+
     final img.Image image = img.decodeImage(Uint8List.fromList(bytes))!;
     int compressQuality = 100;
     int length = imageLength;
