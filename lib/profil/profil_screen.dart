@@ -10,6 +10,7 @@ import 'package:pa_rentalcam/data/model/user_model.dart';
 import 'package:pa_rentalcam/profil/pengaturan.dart';
 import 'package:pa_rentalcam/profil/syarat.dart';
 import 'package:pa_rentalcam/profil/tentang.dart';
+import 'package:pa_rentalcam/profil/verifikasi.dart';
 import '../screens/auth/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../app/image_picker_helper.dart';
@@ -137,6 +138,27 @@ class _ProfilePageState extends State<ProfilePage> {
                 onTap: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (BuildContext context) => Pengaturan()));
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Image.asset(
+                  "assets/images/syarat_icon.png",
+                  width: 32,
+                  height: 32,
+                ),
+                title: Text(
+                  'Verifikasi Nomor Telepon',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context) => verifikasi()));
                 },
               ),
               Divider(),

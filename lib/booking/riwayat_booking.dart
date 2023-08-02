@@ -123,352 +123,486 @@ class _MyHomePageState extends State<MyHomePage>
                   int denda = 0;
                   final listDenda = listBooking.where((element) {
                     if (element.status == "OnRental") {
-                      if (DateTime.now().compareTo(element.endRentalTime!.toDate()) == 1) {
-
-                      }
+                      if (DateTime.now()
+                              .compareTo(element.endRentalTime!.toDate()) ==
+                          1) {}
                     }
                     return false;
                   }).toList();
 
-                  final listDalamPenyewaan = listBooking.where((element) => element.status == "OnRental" || element.status == "Pending").toList();
-                  final listSelesai = listBooking.where((element) => element.status == "Completed").toList();
+                  final listDalamPenyewaan = listBooking
+                      .where((element) =>
+                          element.status == "OnRental" ||
+                          element.status == "Pending")
+                      .toList();
+                  final listSelesai = listBooking
+                      .where((element) => element.status == "Completed")
+                      .toList();
 
                   return Expanded(
                     child: TabBarView(
                       controller: _tabController,
                       children: [
-                        listDenda.isNotEmpty ? ListView.builder(
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              margin: EdgeInsets.all(24),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(18),
-                                color: Colors.white,
-                              ),
-                              padding: EdgeInsets.all(16.0),
-                              child: Center(
-                                child: SizedBox(
-                                  child: Container(
+                        listDenda.isNotEmpty
+                            ? ListView.builder(
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    margin: EdgeInsets.all(24),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(18),
+                                      color: Colors.white,
+                                    ),
                                     padding: EdgeInsets.all(16.0),
-                                    child: Column(
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  decoration: new BoxDecoration(
-                                                    image: new DecorationImage(
-                                                      image: new NetworkImage(
-                                                          listDenda[index].cameraBooking.picture),
-                                                    ),
-                                                    color: Color(0xffD9D9D9),
-                                                    borderRadius:
-                                                    BorderRadius.circular(18),
-                                                  ),
-                                                  width: 91,
-                                                  height: 91,
-                                                  alignment: Alignment.center,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      listDenda[index].cameraBooking.title,
-                                                      style: AppStyles.textBlackColor
-                                                          .copyWith(
-                                                        fontSize: 18,
-                                                        fontWeight: AppStyles.medium,
-                                                        color: Colors.black,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      listDenda[index].cameraBooking.subTitle,
-                                                      style: AppStyles.textBlackColor
-                                                          .copyWith(
-                                                        fontSize: 14,
-                                                        fontWeight: AppStyles.medium,
-                                                        color: Color(0xffADA8A4),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        Column(
-                                          children: [
-                                            Container(
-                                              margin: EdgeInsets.all(6),
-                                              child: Row(
+                                    child: Center(
+                                      child: SizedBox(
+                                        child: Container(
+                                          padding: EdgeInsets.all(16.0),
+                                          child: Column(
+                                            children: [
+                                              Column(
                                                 children: [
-                                                  Text(
-                                                    "Denda",
-                                                    style: AppStyles.textBlackColor
-                                                        .copyWith(
-                                                      fontSize: 16,
-                                                      fontWeight: AppStyles.medium,
-                                                      color: Color(0xffe33737),
-                                                    ),
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        decoration:
+                                                            new BoxDecoration(
+                                                          image:
+                                                              new DecorationImage(
+                                                            image: new NetworkImage(
+                                                                listDenda[index]
+                                                                    .cameraBooking
+                                                                    .picture),
+                                                          ),
+                                                          color:
+                                                              Color(0xffD9D9D9),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(18),
+                                                        ),
+                                                        width: 91,
+                                                        height: 91,
+                                                        alignment:
+                                                            Alignment.center,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            listDenda[index]
+                                                                .cameraBooking
+                                                                .title,
+                                                            style: AppStyles
+                                                                .textBlackColor
+                                                                .copyWith(
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  AppStyles
+                                                                      .medium,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            listDenda[index]
+                                                                .cameraBooking
+                                                                .subTitle,
+                                                            style: AppStyles
+                                                                .textBlackColor
+                                                                .copyWith(
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  AppStyles
+                                                                      .medium,
+                                                              color: Color(
+                                                                  0xffADA8A4),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
                                                   ),
-                                                  Spacer(),
-                                                  Text(
-                                                    denda != 0 ? konversiKeRupiah(denda) : konversiKeRupiah(listDenda[index].totalPrice),
-                                                    style: AppStyles.textBlackColor
-                                                        .copyWith(
-                                                      fontSize: 16,
-                                                      fontWeight: AppStyles.semiBold,
-                                                      color: Colors.black,
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                              Column(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.all(6),
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          "Denda",
+                                                          style: AppStyles
+                                                              .textBlackColor
+                                                              .copyWith(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                AppStyles
+                                                                    .medium,
+                                                            color: Color(
+                                                                0xffe33737),
+                                                          ),
+                                                        ),
+                                                        Spacer(),
+                                                        Text(
+                                                          denda != 0
+                                                              ? konversiKeRupiah(
+                                                                  denda)
+                                                              : konversiKeRupiah(
+                                                                  listDenda[
+                                                                          index]
+                                                                      .totalPrice),
+                                                          style: AppStyles
+                                                              .textBlackColor
+                                                              .copyWith(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                AppStyles
+                                                                    .semiBold,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ],
+                                      ),
                                     ),
+                                  );
+                                },
+                                itemCount: listDenda.length,
+                              )
+                            : Center(
+                                child: Text(
+                                  "Belum ada riwayat",
+                                  style: AppStyles.textBlackColor.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: AppStyles.reguler,
+                                    color: Colors.grey,
                                   ),
                                 ),
                               ),
-                            );
-                          },
-                          itemCount: listDenda.length,
-                        ) : Center(child: Text("Belum ada riwayat", style: AppStyles.textBlackColor.copyWith(
-                          fontSize: 14,
-                          fontWeight: AppStyles.reguler,
-                          color: Colors.grey,
-                        ),),),
-                        listDalamPenyewaan.isNotEmpty ? ListView.builder(
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              margin: EdgeInsets.all(24),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(18),
-                                color: Colors.white,
-                              ),
-                              padding: EdgeInsets.all(16.0),
-                              child: Center(
-                                child: SizedBox(
-                                  child: Container(
+                        listDalamPenyewaan.isNotEmpty
+                            ? ListView.builder(
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    margin: EdgeInsets.all(24),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(18),
+                                      color: Colors.white,
+                                    ),
                                     padding: EdgeInsets.all(16.0),
-                                    child: Column(
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  decoration: new BoxDecoration(
-                                                    image: new DecorationImage(
-                                                      image: new NetworkImage(
-                                                          listDalamPenyewaan[index].cameraBooking.picture),
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                    color: Color(0xffD9D9D9),
-                                                    borderRadius:
-                                                    BorderRadius.circular(18),
-                                                  ),
-                                                  width: 91,
-                                                  height: 91,
-                                                  alignment: Alignment.center,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      listDalamPenyewaan[index].cameraBooking.title,
-                                                      style: AppStyles.textBlackColor
-                                                          .copyWith(
-                                                        fontSize: 18,
-                                                        fontWeight: AppStyles.medium,
-                                                        color: Colors.black,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      listDalamPenyewaan[index].cameraBooking.subTitle,
-                                                      style: AppStyles.textBlackColor
-                                                          .copyWith(
-                                                        fontSize: 14,
-                                                        fontWeight: AppStyles.medium,
-                                                        color: Color(0xffADA8A4),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        Column(
-                                          children: [
-                                            Container(
-                                              margin: EdgeInsets.only(top: 12),
-                                              child: Row(
+                                    child: Center(
+                                      child: SizedBox(
+                                        child: Container(
+                                          padding: EdgeInsets.all(16.0),
+                                          child: Column(
+                                            children: [
+                                              Column(
                                                 children: [
-                                                  Text(
-                                                    listDalamPenyewaan[index].status == "OnRental" ? "Sedang\npenyewaan" : "Pending",
-                                                    style: AppStyles.textBlackColor
-                                                        .copyWith(
-                                                      fontSize: 16,
-                                                      fontWeight: AppStyles.medium,
-                                                      color: listDalamPenyewaan[index].status == "OnRental" ? Color(0xffe38b28) : Color(
-                                                          0xff939090),
-                                                    ),
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        decoration:
+                                                            new BoxDecoration(
+                                                          image:
+                                                              new DecorationImage(
+                                                            image: new NetworkImage(
+                                                                listDalamPenyewaan[
+                                                                        index]
+                                                                    .cameraBooking
+                                                                    .picture),
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                          color:
+                                                              Color(0xffD9D9D9),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(18),
+                                                        ),
+                                                        width: 91,
+                                                        height: 91,
+                                                        alignment:
+                                                            Alignment.center,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            listDalamPenyewaan[
+                                                                    index]
+                                                                .cameraBooking
+                                                                .title,
+                                                            style: AppStyles
+                                                                .textBlackColor
+                                                                .copyWith(
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  AppStyles
+                                                                      .medium,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            listDalamPenyewaan[
+                                                                    index]
+                                                                .cameraBooking
+                                                                .subTitle,
+                                                            style: AppStyles
+                                                                .textBlackColor
+                                                                .copyWith(
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  AppStyles
+                                                                      .medium,
+                                                              color: Color(
+                                                                  0xffADA8A4),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
                                                   ),
-                                                  Spacer(),
-                                                  Text(
-                                                    konversiKeRupiah(listDalamPenyewaan[index].totalPrice),
-                                                    style: AppStyles.textBlackColor
-                                                        .copyWith(
-                                                      fontSize: 16,
-                                                      fontWeight: AppStyles.semiBold,
-                                                      color: Colors.black,
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                              Column(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: 12),
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          listDalamPenyewaan[
+                                                                          index]
+                                                                      .status ==
+                                                                  "OnRental"
+                                                              ? "Sedang\npenyewaan"
+                                                              : "Pending",
+                                                          style: AppStyles
+                                                              .textBlackColor
+                                                              .copyWith(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                AppStyles
+                                                                    .medium,
+                                                            color: listDalamPenyewaan[
+                                                                            index]
+                                                                        .status ==
+                                                                    "OnRental"
+                                                                ? Color(
+                                                                    0xffe38b28)
+                                                                : Color(
+                                                                    0xff939090),
+                                                          ),
+                                                        ),
+                                                        Spacer(),
+                                                        Text(
+                                                          konversiKeRupiah(
+                                                              listDalamPenyewaan[
+                                                                      index]
+                                                                  .totalPrice),
+                                                          style: AppStyles
+                                                              .textBlackColor
+                                                              .copyWith(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                AppStyles
+                                                                    .semiBold,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ],
+                                      ),
                                     ),
+                                  );
+                                },
+                                itemCount: listDalamPenyewaan.length,
+                              )
+                            : Center(
+                                child: Text(
+                                  "Belum ada riwayat",
+                                  style: AppStyles.textBlackColor.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: AppStyles.reguler,
+                                    color: Colors.grey,
                                   ),
                                 ),
                               ),
-                            );
-                          },
-                          itemCount: listDalamPenyewaan.length,
-                        ) : Center(child: Text("Belum ada riwayat", style: AppStyles.textBlackColor.copyWith(
-                          fontSize: 14,
-                          fontWeight: AppStyles.reguler,
-                          color: Colors.grey,
-                        ),),),
-                        listSelesai.isNotEmpty ? ListView.builder(
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              margin: EdgeInsets.all(24),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(18),
-                                color: Colors.white,
-                              ),
-                              padding: EdgeInsets.all(16.0),
-                              child: Center(
-                                child: SizedBox(
-                                  child: Container(
+                        listSelesai.isNotEmpty
+                            ? ListView.builder(
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    margin: EdgeInsets.all(24),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(18),
+                                      color: Colors.white,
+                                    ),
                                     padding: EdgeInsets.all(16.0),
-                                    child: Column(
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  decoration: new BoxDecoration(
-                                                    image: new DecorationImage(
-                                                      image: new NetworkImage(
-                                                          listSelesai[index].cameraBooking.picture),
-                                                    ),
-                                                    color: Color(0xffD9D9D9),
-                                                    borderRadius:
-                                                    BorderRadius.circular(18),
-                                                  ),
-                                                  width: 91,
-                                                  height: 91,
-                                                  alignment: Alignment.center,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      listSelesai[index].cameraBooking.title,
-                                                      style: AppStyles.textBlackColor
-                                                          .copyWith(
-                                                        fontSize: 18,
-                                                        fontWeight: AppStyles.medium,
-                                                        color: Colors.black,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      listSelesai[index].cameraBooking.subTitle,
-                                                      style: AppStyles.textBlackColor
-                                                          .copyWith(
-                                                        fontSize: 14,
-                                                        fontWeight: AppStyles.medium,
-                                                        color: Color(0xffADA8A4),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        Column(
-                                          children: [
-                                            Container(
-                                              margin: EdgeInsets.all(6),
-                                              child: Row(
+                                    child: Center(
+                                      child: SizedBox(
+                                        child: Container(
+                                          padding: EdgeInsets.all(16.0),
+                                          child: Column(
+                                            children: [
+                                              Column(
                                                 children: [
-                                                  Text(
-                                                    'Selesai',
-                                                    style: AppStyles.textBlackColor
-                                                        .copyWith(
-                                                      fontSize: 16,
-                                                      fontWeight: AppStyles.medium,
-                                                      color: Color(0xff20F1B3),
-                                                    ),
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        decoration:
+                                                            new BoxDecoration(
+                                                          image:
+                                                              new DecorationImage(
+                                                            image: new NetworkImage(
+                                                                listSelesai[
+                                                                        index]
+                                                                    .cameraBooking
+                                                                    .picture),
+                                                          ),
+                                                          color:
+                                                              Color(0xffD9D9D9),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(18),
+                                                        ),
+                                                        width: 91,
+                                                        height: 91,
+                                                        alignment:
+                                                            Alignment.center,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            listSelesai[index]
+                                                                .cameraBooking
+                                                                .title,
+                                                            style: AppStyles
+                                                                .textBlackColor
+                                                                .copyWith(
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  AppStyles
+                                                                      .medium,
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            listSelesai[index]
+                                                                .cameraBooking
+                                                                .subTitle,
+                                                            style: AppStyles
+                                                                .textBlackColor
+                                                                .copyWith(
+                                                              fontSize: 14,
+                                                              fontWeight:
+                                                                  AppStyles
+                                                                      .medium,
+                                                              color: Color(
+                                                                  0xffADA8A4),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
                                                   ),
-                                                  Spacer(),
-                                                  Text(
-                                                    konversiKeRupiah(listSelesai[index].totalPrice),
-                                                    style: AppStyles.textBlackColor
-                                                        .copyWith(
-                                                      fontSize: 16,
-                                                      fontWeight: AppStyles.semiBold,
-                                                      color: Colors.black,
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                              Column(
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.all(6),
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          'Selesai',
+                                                          style: AppStyles
+                                                              .textBlackColor
+                                                              .copyWith(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                AppStyles
+                                                                    .medium,
+                                                            color: Color(
+                                                                0xff20F1B3),
+                                                          ),
+                                                        ),
+                                                        Spacer(),
+                                                        Text(
+                                                          konversiKeRupiah(
+                                                              listSelesai[index]
+                                                                  .totalPrice),
+                                                          style: AppStyles
+                                                              .textBlackColor
+                                                              .copyWith(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                AppStyles
+                                                                    .semiBold,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ],
+                                      ),
                                     ),
+                                  );
+                                },
+                                itemCount: listSelesai.length,
+                              )
+                            : Center(
+                                child: Text(
+                                  "Belum ada riwayat",
+                                  style: AppStyles.textBlackColor.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: AppStyles.reguler,
+                                    color: Colors.grey,
                                   ),
                                 ),
                               ),
-                            );
-                          },
-                          itemCount: listSelesai.length,
-                        ) : Center(child: Text("Belum ada riwayat", style: AppStyles.textBlackColor.copyWith(
-                          fontSize: 14,
-                          fontWeight: AppStyles.reguler,
-                          color: Colors.grey,
-                        ),),),
                       ],
                     ),
                   );

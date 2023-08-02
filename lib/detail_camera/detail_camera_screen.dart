@@ -7,7 +7,7 @@ import 'package:pa_rentalcam/data/model/camera_model.dart';
 import 'package:pa_rentalcam/screens/home/home_screen.dart';
 
 class DetailPage extends StatelessWidget {
-final CameraModel camera;
+  final CameraModel camera;
   DetailPage({required this.camera});
 
   @override
@@ -172,9 +172,12 @@ final CameraModel camera;
                         child: MaterialButton(
                           onPressed: () {
                             Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        BookingPage(cameraModel: camera.copyWith(quantity: 1), ),),);
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => BookingPage(
+                                  cameraModel: camera.copyWith(quantity: 1),
+                                ),
+                              ),
+                            );
                           },
                           child: Container(
                             padding: EdgeInsets.all(10),

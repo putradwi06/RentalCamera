@@ -201,9 +201,13 @@ class _BookingPageState extends State<BookingPage> {
                                           GestureDetector(
                                             onTap: () {
                                               setState(() {
-                                                if (widget
-                                                        .cameraModel.quantity !=
-                                                    null && widget.cameraModel.quantity != widget.cameraModel.stock) {
+                                                if (widget.cameraModel
+                                                            .quantity !=
+                                                        null &&
+                                                    widget.cameraModel
+                                                            .quantity !=
+                                                        widget.cameraModel
+                                                            .stock) {
                                                   widget.cameraModel.quantity =
                                                       widget.cameraModel
                                                               .quantity! +
@@ -647,7 +651,7 @@ class _BookingPageState extends State<BookingPage> {
                                         context: context,
                                         builder: (_) {
                                           return DialogReview(
-                                              booking:  bookingModel);
+                                              booking: bookingModel);
                                         });
                                   },
                                   child: Container(
@@ -796,8 +800,6 @@ class _DialogReviewState extends State<DialogReview> {
                     imgBuktiTransferUrl =
                         await FirebaseStorageHelper.uploadBuktiTransfer(
                             imgBuktiTransfer!);
-
-
 
                     await Repository().sendBooking(widget.booking
                         .copyWith(buktiTransfer: imgBuktiTransferUrl));

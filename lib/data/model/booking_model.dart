@@ -16,35 +16,33 @@ class Booking extends Equatable {
   final String status;
   final String buktiTransfer;
 
-  Booking({
-    required this.bookingId,
-    required this.cameraBooking,
-    required this.rentalDay,
-    required this.startRentalTime,
-    required this.endRentalTime,
-    required this.totalPrice,
-    required this.userBookingId,
-    required this.userBookingName,
-    required this.userBookingNoTlpn,
-    required this.createdAt,
-    required this.status,
-    required this.buktiTransfer
-  });
+  Booking(
+      {required this.bookingId,
+      required this.cameraBooking,
+      required this.rentalDay,
+      required this.startRentalTime,
+      required this.endRentalTime,
+      required this.totalPrice,
+      required this.userBookingId,
+      required this.userBookingName,
+      required this.userBookingNoTlpn,
+      required this.createdAt,
+      required this.status,
+      required this.buktiTransfer});
 
-  Booking copyWith({
-    String? bookingId,
-    CameraModel? cameraBooking,
-    int? rentalDay,
-    Timestamp? startRentalTime,
-    Timestamp? endRentalTime,
-    int? totalPrice,
-    String? userBookingId,
-    String? userBookingName,
-    int? userBookingNoTlpn,
-    Timestamp? createdAt,
-    String? status,
-    String? buktiTransfer
-  }) {
+  Booking copyWith(
+      {String? bookingId,
+      CameraModel? cameraBooking,
+      int? rentalDay,
+      Timestamp? startRentalTime,
+      Timestamp? endRentalTime,
+      int? totalPrice,
+      String? userBookingId,
+      String? userBookingName,
+      int? userBookingNoTlpn,
+      Timestamp? createdAt,
+      String? status,
+      String? buktiTransfer}) {
     return Booking(
       bookingId: bookingId ?? this.bookingId,
       cameraBooking: cameraBooking ?? this.cameraBooking,
@@ -85,9 +83,9 @@ class Booking extends Equatable {
       rentalDay: map['rental_day'],
       startRentalTime: map['start_rental_time'],
       endRentalTime: map['end_rental_time'],
-      totalPrice: map['total_price'] ,
+      totalPrice: map['total_price'],
       userBookingId: map['user_booking_id'],
-      userBookingName: map['user_booking_name'] ,
+      userBookingName: map['user_booking_name'],
       userBookingNoTlpn: map['user_booking_noTlpn'],
       createdAt: map['created_at'],
       status: map['status'],

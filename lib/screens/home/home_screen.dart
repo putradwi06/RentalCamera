@@ -49,7 +49,8 @@ class _HomePageState extends State<HomePage> {
 
             if (snapshot.hasData) {
               final List<CameraModel> data = snapshot.data ?? [];
-              final List<CameraModel> listCamera = data.where((element) => element.stock != 0).toList();
+              final List<CameraModel> listCamera =
+                  data.where((element) => element.stock != 0).toList();
               return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,7 +243,11 @@ class _HomePageState extends State<HomePage> {
                             itemBuilder: (_, index) {
                               final camera = listCamera[index];
                               return GestureDetector(
-                                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => DetailPage(camera: camera))),
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            DetailPage(camera: camera))),
                                 child: Container(
                                   height: 90,
                                   margin: EdgeInsets.only(bottom: 16),
@@ -257,7 +262,8 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           SizedBox(
                                             child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(18),
+                                              borderRadius:
+                                                  BorderRadius.circular(18),
                                               child: Image.network(
                                                 camera.picture,
                                                 fit: BoxFit.cover,
@@ -275,8 +281,8 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           Text(
                                             camera.title,
-                                            style:
-                                                AppStyles.textBlackColor.copyWith(
+                                            style: AppStyles.textBlackColor
+                                                .copyWith(
                                               fontSize: 18,
                                               fontWeight: AppStyles.medium,
                                               color: Colors.black,
@@ -284,8 +290,8 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           Text(
                                             camera.subTitle,
-                                            style:
-                                                AppStyles.textBlackColor.copyWith(
+                                            style: AppStyles.textBlackColor
+                                                .copyWith(
                                               fontSize: 14,
                                               fontWeight: AppStyles.medium,
                                               color: Color(0xffADA8A4),
